@@ -1,0 +1,85 @@
+commit 2d7d741a9e54a4e85901dda4d7e87fff92a17457
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:44:07 2022 +0200
+
+    Deleted file1 and renamed file2 to file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 04dcd34e34b90fa699b4bae7eecfe265026815dd
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:37:39 2022 +0200
+
+    Added dir tiedostoja and created 3 files
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit cdbe9ff88a217b9b49874af05d4d7f809e3ba28e
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:26:44 2022 +0200
+
+    Rewrote some text in eka.txt and created kolmas.txt
+
+ eka.txt    | 4 +++-
+ kolmas.txt | 1 +
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+commit 9b359fd244c9284195e9d11ed5bcf2ecfd3d1233
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:22:33 2022 +0200
+
+    Renamed tiedosto.txt to eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit eb9f7916e1eb489e74797a095a93b32dd1260572
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:21:01 2022 +0200
+
+    Removed toinen.txt
+
+ toinen.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit df70e1ebd4e2193535d53bb8a931e2349d8504da
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:18:15 2022 +0200
+
+    Removed and added some text to tiedosto.txt
+
+ tiedosto.txt | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+commit 286cf106a390abe20221e7b202d1a73adbdb3a9b
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:16:28 2022 +0200
+
+    Added text to tiedosto.txt
+
+ tiedosto.txt | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+commit 037385388aef7b38cd309db363184374265a8cd0
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:08:31 2022 +0200
+
+    Edited tiedosto.txt and added toinen.txt
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit b3582e7ebb6acea46c151933943cad39d87642d6
+Author: Simo Soini <simo@capscience.fi>
+Date:   Tue Mar 22 20:04:18 2022 +0200
+
+    created file tiedosto.txt
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
