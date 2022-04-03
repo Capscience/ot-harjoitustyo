@@ -1,4 +1,10 @@
 # Ohjelmistotekniikka, harjoitustyö
+
+## Projekti
+
+[tuntikirjanpito.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+[vaativuusmaarittely.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+
 ## Tehtävät
 
 ### Viikko 1
@@ -9,4 +15,3 @@
 ### Viikko 2
 [kattavuus.png](https://github.com/Capslock01/ot-harjoitustyo/blob/master/laskarit/viikko2/kattavuus.png)
 
-Viikon 2 harjoitustyön osalta en ehtinyt kirjoittaa pyydettyjä tietoja ylös, mutta suunnitelma on hyvin pitkälle suunniteltu mielessä.
