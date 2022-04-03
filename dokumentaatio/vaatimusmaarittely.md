@@ -6,8 +6,7 @@ Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintoj
 
 ## Käyttöliittymä
 
-Käyttöliittymäkaavio
-****
+![](./kayttoliittyma.png)
 
 ## Perusversion toiminnallisuus
 
