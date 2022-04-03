@@ -3,6 +3,7 @@
 ## Projekti
 
 [tuntikirjanpito.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+
 [vaativuusmaarittely.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 ## Tehtävät
