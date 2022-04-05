@@ -12,7 +12,7 @@ classDiagram
 	Aloitusruutu "1" --> "1" Peli
 	Vankila "1" --> "1" Peli
 	Ruutu "1" --> "*" Pelimerkki
-	Katu "*" <-- "1" Pelaaja
+	Kadut "*" <-- "1" Pelaaja
 	Ruutu "1" --|> "1" Aloitusruutu
 	Ruutu "1" --|> "1" Vankila
 	Ruutu "1" --|> "1" SattumaYhteismaa
