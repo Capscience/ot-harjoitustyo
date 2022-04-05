@@ -1,0 +1,38 @@
+import unittest
+from time import sleep
+from timer import Timer
+
+class TestTimer(unittest.TestCase):
+    def setUp(self):
+        self.timer = Timer()
+    
+    def test_start_current_stop(self):
+        self.timer.start()
+        sleep(2)
+        ret = self.timer.current()
+        self.assertEqual(ret, 2.0)
+        sleep(2)
+        ret = self.timer.stop()
+        self.assertEqual(ret, 4.0)
+    
+    def test_pause(self):
+        self.timer.start()
+        sleep(1)
+        self.timer.pause()
+        sleep(1)
+        self.timer.start()
+        sleep(1)
+        ret = self.timer.stop()
+        self.assertEqual(ret, 2.0)
+    
+    def test_halfrounding(self):
+        self.timer.start()
+        sleep(0.1)
+        ret = self.timer.current()
+        self.assertEqual(ret, 0.0)
+        sleep(0.4)
+        ret = self.timer.current()
+        self.assertEqual(ret, 0.5)
+        sleep(1)
+        ret = self.timer.stop()
+        self.assertEqual(ret, 1.5)
