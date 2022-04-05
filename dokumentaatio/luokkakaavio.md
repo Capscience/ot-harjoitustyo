@@ -31,10 +31,10 @@ classDiagram
 	stopwatch
 	instance
 	}
-	Piechart{
+	class Piechart{
 	}
-	Graph{
+	class Graph{
 	}
-	Database{
+	class Database{
 	}
 ```
