@@ -20,48 +20,48 @@ classDiagram
 	Ruutu "1" --|> "1" Kadut
 	SattumaYhteismaa "1" <-- "*" Kortti
 	class Pelimerkki{
-	      paikka
+	    paikka
 	}
 	class Pelaaja{
-	      rahat
-		  pelimerkki
+	    rahat
+		pelimerkki
 	}
 	class Peli{
-	      pelaajat
-	      noppa1
-	      noppa2
-	      aloitusruutu
-		  vankila
+	    pelaajat
+	    noppa1
+	    noppa2
+	    aloitusruutu
+		vankila
 	}
 	class Ruutu{
-		  toiminto
-	      seuraava
+		toiminto
+		seuraava
 	}
 	class Aloitusruutu{
-		  toiminto
-		  seuraava
+		toiminto
+		seuraava
 	}
 	class Vankila{
-		  toiminto
-		  seuraava
+		toiminto
+		seuraava
 	}
 	class SattumaYhteismaa{
-		  toiminto
-		  seuraava
-		  kortit
+		toiminto
+		seuraava
+		kortit
 	}
 	class Kortti{
-		  toiminto
+		toiminto
 	}
 	class AsematLaitokset{
-		  toiminto
-		  seuraava
+		toiminto
+		seuraava
 	}
 	class Kadut{
-		  toiminto
-		  seuraava
-		  nimi
-		  omistaja
+		toiminto
+		seuraava
+		nimi
+		omistaja
 	}
 	class Noppa{
 	}
