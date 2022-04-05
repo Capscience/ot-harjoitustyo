@@ -3,6 +3,11 @@ from time import sleep
 from timer import Timer
 
 class TestTimer(unittest.TestCase):
+    """Test class Timer.
+    
+    Test class methods, check that times are correct,
+    and especially that rounding is correct.
+    """
     def setUp(self):
         self.timer = Timer()
     
@@ -36,3 +41,17 @@ class TestTimer(unittest.TestCase):
         sleep(1)
         ret = self.timer.stop()
         self.assertEqual(ret, 1.5)
+    
+    def test_pause_while_paused(self):
+        self.timer.pause()
+        self.timer.start()
+        sleep(0.5)
+        ret = self.timer.stop()
+        self.assertEqual(ret, 0.5)
+    
+    def test_start_while_running(self):
+        self.timer.start()
+        self.timer.start()
+        sleep(0.5)
+        ret = self.timer.stop()
+        self.assertEqual(ret, 0.5)
