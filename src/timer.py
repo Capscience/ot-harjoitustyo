@@ -46,7 +46,7 @@ class Timer:
     def stop(self) -> float:
         """Stop timer and return worktime.
         
-        Worktime is rounded to the nearest half or whole hour.
+        Worktime is rounded to the nearest half or whole second.
         """
         
         time = self.pause()

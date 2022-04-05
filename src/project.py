@@ -7,3 +7,6 @@ class Project:
         self.name = name
         self.timer = Timer()
         print(self.timer)
+
+if __name__ == '__main__':
+    t = Timer()
