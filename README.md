@@ -1,4 +1,6 @@
-# Project timer
+# Project Timer
+
+Testit suoritettu python-versioilla `3.8.3` sekä `3.10.4`.
 
 ## Dokumentaatio
 
