@@ -19,4 +19,4 @@ Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintoj
 - statistiikat ja kuvaajat eri aiheista
 - selkeä ja siisti käyttöliittymä
 - usea ajastin käytössä samaan aikaan
-- tietojen exporttaus cvs tiedostona
+- tietojen exporttaus csv tiedostona
