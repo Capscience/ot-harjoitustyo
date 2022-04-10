@@ -5,7 +5,7 @@ description = ""
 authors = ["Simo Soini <simo@capscience.fi>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 pytest = "^7.1.1"
 invoke = "^1.7.0"
 
