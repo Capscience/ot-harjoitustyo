@@ -5,5 +5,5 @@ class Project:
 
     def __init__(self, name: str, timer: Timer) -> None:
         self.name = name
-        self.timer = Timer()
+        self.timer = timer
         print(self.timer)

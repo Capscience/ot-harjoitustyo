@@ -3,17 +3,17 @@ import time
 
 class Timer:
     """Timer class for workhour counter."""
-    
+
     def __init__(self) -> None:
         """Class init method.
-        
+
         Create Timer object, starts at 0.
         """
-        
+
         self.__times = []
         self.__start = 0
         self.__running = False
-    
+
     def start(self) -> None:
         """Start new or paused timer."""
 
@@ -30,12 +30,12 @@ class Timer:
 
     def pause(self) -> float:
         """Pause timer, use start() to continue.
-        
+
         Return worktime so far.
         """
 
         if not self.__running:
-            return
+            return None
         stop = time.time()
         self.__times.append(stop - self.__start)
         self.__running = False
@@ -45,10 +45,10 @@ class Timer:
 
     def stop(self) -> float:
         """Stop timer and return worktime.
-        
+
         Worktime is rounded to the nearest half or whole second.
         """
-        
-        time = self.pause()
+
+        worktime = self.pause()
         self.__times = 0
-        return time
+        return worktime
