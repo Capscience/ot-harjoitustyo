@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column,String,Integer
+from sqlalchemy import Column,String,Integer,DateTime
 from database.database import Base
 
 
@@ -18,4 +18,4 @@ class ProjectData(Base):
     id = Column(Integer(), primary_key = True)
     project_id = Column(Integer())
     time = Column(Integer())
-    date = Column(datetime(), default = datetime.now())
+    date = Column(DateTime(), default = datetime.now())
