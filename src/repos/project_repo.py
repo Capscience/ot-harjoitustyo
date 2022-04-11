@@ -1,6 +1,6 @@
 from database.tables import Projects
 from entities.project import Project
-from database.database import Session, Base, engine
+from database.database import Session,Base,engine
 
 
 class ProjectRepository:
@@ -13,11 +13,11 @@ class ProjectRepository:
     def _update(self) -> None:
         """Read projects from ProjectData."""
 
-        self._session.
-    
+        return
+
     def _initialize(self) -> None:
         """Initialize database and get data if there is any."""
 
         Base.metadata.create_all(engine)
 
-projectrepo = ProjectRepository()
+projectrepo = ProjectRepository(Session)

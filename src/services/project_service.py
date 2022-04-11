@@ -1,4 +1,4 @@
-from project_repo import projectrepo
+from repos.project_repo import projectrepo
 
 
 class ProjectService:
@@ -6,6 +6,6 @@ class ProjectService:
 
     def __init__(self) -> None:
         self._default_repo = projectrepo
-        self.default_repo._initialize()
+        self._default_repo._initialize()
 
 project_service = ProjectService()

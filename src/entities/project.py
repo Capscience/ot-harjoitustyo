@@ -1,4 +1,5 @@
-from timer import Timer
+from entities.timer import Timer
+
 
 class Project:
     """This class represents a cource or project you can time."""

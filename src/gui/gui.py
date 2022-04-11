@@ -7,12 +7,12 @@ class GUI:
     def __init__(self, root) -> None:
         self._root = root
         self._open = None
-    
+
     def start(self) -> None:
         """Start GUI."""
 
         self._show_mainview()
-    
+
     def _kill_current_view(self) -> None:
         """Destroy currently open view if exists."""
 
@@ -25,8 +25,8 @@ class GUI:
 
         self._kill_current_view()
 
-        self._show = MainView(
+        self._open = MainView(
             self._root
         )
 
-        self._show.pack()
+        self._open.pack()
