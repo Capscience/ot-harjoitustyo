@@ -1,6 +1,6 @@
 import unittest
 from time import sleep
-from timer import Timer
+from entities.timer import Timer
 
 class TestTimer(unittest.TestCase):
     """Test class Timer.
@@ -14,8 +14,8 @@ class TestTimer(unittest.TestCase):
     def test_start_current_stop(self):
         self.timer.start()
         sleep(2)
-        ret = self.timer.current()
-        self.assertEqual(ret, 2.0)
+        ret = str(self.timer)
+        self.assertEqual(ret, '00:00:02')
         sleep(2)
         ret = self.timer.stop()
         self.assertEqual(ret, 4.0)
@@ -33,11 +33,11 @@ class TestTimer(unittest.TestCase):
     def test_halfrounding(self):
         self.timer.start()
         sleep(0.1)
-        ret = self.timer.current()
-        self.assertEqual(ret, 0.0)
+        ret = str(self.timer)
+        self.assertEqual(ret, '00:00:00')
         sleep(0.4)
-        ret = self.timer.current()
-        self.assertEqual(ret, 0.5)
+        ret = str(self.timer)
+        self.assertEqual(ret, '00:00:00')
         sleep(1)
         ret = self.timer.stop()
         self.assertEqual(ret, 1.5)
