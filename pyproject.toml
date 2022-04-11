@@ -8,6 +8,7 @@ authors = ["Simo Soini <simo@capscience.fi>"]
 python = "^3.8"
 pytest = "^7.1.1"
 invoke = "^1.7.0"
+SQLAlchemy = "^1.4.35"
 
 [tool.poetry.dev-dependencies]
 coverage = "^6.3.2"

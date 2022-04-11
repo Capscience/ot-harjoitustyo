@@ -14,6 +14,15 @@ class Timer:
         self.__start = 0
         self.__running = False
 
+    def __str__(self) -> str:
+        """String form of timer."""
+
+        total = int(sum(self.__times) + time.time() - self.__start)
+        hours = total // 3600
+        minutes = total%3600 // 60
+        seconds = total%60
+        return f'{hours:02d}:{minutes:02d}:{seconds:02d}'
+
     def start(self) -> None:
         """Start new or paused timer."""
 
@@ -21,12 +30,6 @@ class Timer:
             return
         self.__start = time.time()
         self.__running = True
-
-    def current(self) -> float:
-        """Print duration so far."""
-
-        total = sum(self.__times) + time.time() - self.__start
-        return round(total * 2) / 2 # total/3600 later to get hours
 
     def pause(self) -> float:
         """Pause timer, use start() to continue.
