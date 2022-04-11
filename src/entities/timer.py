@@ -14,9 +14,11 @@ class Timer:
         self.__start = 0
         self.__running = False
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """String form of timer."""
 
+        if self.__start == 0:
+            return '00:00:00'
         total = int(sum(self.__times) + time.time() - self.__start)
         hours = total // 3600
         minutes = total%3600 // 60
