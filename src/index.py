@@ -7,9 +7,12 @@ def main() -> None:
 
     root = Tk()
     root.title('Project Timer')
+    root.geometry('1280x720')
 
     window = GUI(root)
     window.start()
+
+    root.bind('<Configure>', window.resize)
 
     root.mainloop()
 
