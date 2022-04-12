@@ -85,7 +85,8 @@ class MainView:
         create_project = ttk.Button(
             right_frame,
             command = lambda:[project_service.add_project(project_name.get()),
-            project_name.delete(0, 'end')],
+            project_name.delete(0, 'end'),
+            project_service.print_data()],
             text = 'Lisää projekti'
         )
         create_project.grid(row = 3, column = 0, pady=10, padx=10, sticky='new')

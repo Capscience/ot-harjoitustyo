@@ -8,6 +8,9 @@ class ProjectService:
         self._default_repo = projectrepo
         self._default_repo._initialize()
 
+    def print_data(self) -> None:
+        self._default_repo.print_projects()
+
     def add_project(self, name: str) -> None:
         """Create new project to project repo."""
 
