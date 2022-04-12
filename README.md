@@ -20,11 +20,7 @@ Testit suoritettu python-versioilla `3.8.3` sekä `3.10.4`. Varsinkin vanhempien
 ```
 poetry install
 ```
-2. Alusta sovellus:
-```
-ei implementoitu
-```
-3. Käynnistä sovellus:
+2. Käynnistä sovellus:
 ```
 poetry run invoke start
 ```
@@ -48,5 +44,5 @@ poetry run invoke coverage-report
 
 Pylint-testin voi ajaa komennolla:
 ```
-poetry run invoke pylint-test
+poetry run invoke lint
 ```

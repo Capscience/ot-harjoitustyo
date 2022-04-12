@@ -1,6 +1,6 @@
-from database.tables import Projects
+# from database.tables import Projects
 from entities.project import Project
-from database.database import Session,Base,engine
+from database.database import Session, Base, engine
 
 
 class ProjectRepository:
@@ -12,7 +12,7 @@ class ProjectRepository:
 
     def check(self, name: str) -> bool:
         """Check for project with given name.
-        
+
         Return True if found, else False.
         """
 
@@ -27,6 +27,7 @@ class ProjectRepository:
         if self.check(name):
             return False
         self._projects.append(Project(name.lower()))
+        return True
 
     def print_projects(self) -> None:
         for project in self._projects:

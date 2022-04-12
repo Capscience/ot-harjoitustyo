@@ -30,7 +30,7 @@ class GUI:
         )
 
         #self._open.pack()
-    
+
     def resize(self, event) -> None:
         """Resize all text in GUI."""
 

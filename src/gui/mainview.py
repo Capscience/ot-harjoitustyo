@@ -1,6 +1,7 @@
-from services.project_service import project_service
 import tkinter as tk
 from tkinter import CENTER, E, W, ttk,constants,Grid
+
+from services.project_service import project_service
 
 
 class MainView:
@@ -17,11 +18,11 @@ class MainView:
         """Pack self._frame."""
 
         self._frame.pack(fill = constants.BOTH)
-    
+
     def update(self, width) -> None:
-        
+
         size = int(width*0.01)
-        style = ttk.Style()
+        # style = ttk.Style()
         # style.theme_use('default')
         # style.map('TreeView')
         # style.configure('Treeview.Heading', font = ('Arial', size))
@@ -39,7 +40,7 @@ class MainView:
         Grid.rowconfigure(self._root, 0, weight = 1)
         Grid.columnconfigure(self._root, 1, weight = 2, minsize = 200)
         Grid.columnconfigure(self._root, 0, weight = 5)
-        
+
         left_frame = tk.Frame(self._root, bg='white')
         right_frame = tk.Frame(self._root, bg='white')
         left_frame.grid(row=0, column=0, sticky='nsew')
@@ -84,8 +85,7 @@ class MainView:
         create_project = ttk.Button(
             right_frame,
             command = lambda:[project_service.add_project(project_name.get()),
-            project_name.delete(0, 'end'),
-            project_service._default_repo.print_projects()],
+            project_name.delete(0, 'end')],
             text = 'Lisää projekti'
         )
         create_project.grid(row = 3, column = 0, pady=10, padx=10, sticky='new')
