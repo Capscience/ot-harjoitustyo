@@ -4,3 +4,9 @@
 
 - lisättiin Timer-luokka, joka toimii projektille sekuntikellona, ja pyöristää luvut
 - lisättiin testit Timer-luokalle
+
+## Viikko 4
+
+- graafinen käyttöliittymä on luotu, oikeaa toiminnallisuutta ei vielä ole
+- sovelluslogiikan ja pysyväistalletuksen runko lähes valmis, ja yhteys käyttöliittymään aloitettu
+
