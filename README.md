@@ -14,6 +14,8 @@ Testit suoritettu python-versioilla `3.8.3` sekä `3.10.4`. Varsinkin vanhempien
 
 [changelog.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
+[arkkitehtuuri.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 ## Asennus
 
 1. Asenna vaadittavat moduulit:
