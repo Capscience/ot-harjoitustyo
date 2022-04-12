@@ -7,4 +7,5 @@
 | 5.4.2022 | 2 | Sovelluksen tiedostorunko, ohjelmakoodin aloittaminen, invoke-komennot, testaamisen aloitus |
 | 10.4.2022 | 5 | Perehtyminen Tkinteriin, käyttöliittymän aloittaminen |
 | 11.4.2022 | 6 | Sovelluslogiikan edistäminen, sqlalcemyyn tutustuminen, tietokannan toteutuksen aloitus |
-| Yhteensä | 16 | |
+| 12.4.2022 | 9 | GUI sekä sovelluslogiikan yhdistäminen, sovelluslogiikassa perustoiminnallisuus lähes valmiiksi|
+| Yhteensä | 25 | |
