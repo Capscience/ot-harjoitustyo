@@ -67,7 +67,11 @@ class MainView:
         create_project.grid(row = 3, column = 0, pady=10, padx=10, sticky='new')
 
         Grid.columnconfigure(right_frame, 0, weight = 1)
-        Grid.rowconfigure(right_frame, 0, weight = 0)
-        Grid.rowconfigure(right_frame, 1, weight = 0)
-        Grid.rowconfigure(right_frame, 2, weight = 0)
-        Grid.rowconfigure(right_frame, 3, weight = 0)
+
+
+class ProjectController:
+    """GUI class to control project timers."""
+
+    def __init__(self, root, label) -> None:
+        self._root = root
+        self.label = label
