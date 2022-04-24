@@ -46,32 +46,7 @@ class MainView:
         left_frame.grid(row=0, column=0, sticky='nsew')
         right_frame.grid(row=0, column=1, sticky='nsew')
 
-        projects = ttk.Treeview(left_frame)
-        self._treeview = projects
-
-        # Define columns for treeview
-        projects['columns'] = ('Nimi', 'Ajastin', 'Napit')
-        # Format columns
-        projects.column('#0', width = 0)
-        projects.column('Nimi', anchor = W, width = 1, minwidth = 1)
-        projects.column('Napit', anchor = CENTER, width = 1, minwidth = 1)
-        projects.column('Ajastin', anchor = E, width = 1, minwidth = 1)
-        # Headings for columns
-        projects.heading('Nimi', text = 'Nimi', anchor = W)
-        projects.heading('Napit', text = 'Start/Stop/Pause', anchor = CENTER)
-        projects.heading('Ajastin', text = 'Ajastin', anchor = E)
-
-        projects.insert(
-            parent = '',
-            index = 'end',
-            iid = 0,
-            text = '',
-            values = ('Ohte', '00:00:00', 'Tähän napit')
-        )
-
-        Grid.columnconfigure(left_frame, 0, weight = 1)
-        Grid.rowconfigure(left_frame, 0, weight = 1)
-        projects.grid(row = 0, column = 0, pady=20, padx=20, sticky = 'nsew')
+        # TODO make custom class instead of Treeview
 
         # New project creation area
         new_project_label = ttk.Label(right_frame, text = 'Luo uusi projekti', font = ('Arial', 18))
