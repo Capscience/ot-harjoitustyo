@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import CENTER, E, W, ttk,constants,Grid
+from tkinter import ttk, constants, Grid
 
 from services.project_service import project_service
 
