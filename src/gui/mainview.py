@@ -79,8 +79,8 @@ class MainView:
 
         project_name_label = ttk.Label(right_frame, text = 'Projektin nimi:', font = ('Arial', 12))
         project_name = ttk.Entry(right_frame)
-        project_name_label.grid(row = 1, column = 0, pady=10, padx=10, sticky='new')
-        project_name.grid(row = 2, column = 0, pady=10, padx=10, sticky='new')
+        project_name_label.grid(row = 1, column = 0, pady=10, padx=10, sticky='nsew')
+        project_name.grid(row = 2, column = 0, pady=10, padx=10, sticky='nsew')
 
         create_project = ttk.Button(
             right_frame,
@@ -92,7 +92,7 @@ class MainView:
         create_project.grid(row = 3, column = 0, pady=10, padx=10, sticky='new')
 
         Grid.columnconfigure(right_frame, 0, weight = 1)
-        Grid.rowconfigure(right_frame, 0, weight = 1)
-        Grid.rowconfigure(right_frame, 1, weight = 1)
-        Grid.rowconfigure(right_frame, 2, weight = 1)
-        Grid.rowconfigure(right_frame, 3, weight = 1)
+        Grid.rowconfigure(right_frame, 0, weight = 0)
+        Grid.rowconfigure(right_frame, 1, weight = 0)
+        Grid.rowconfigure(right_frame, 2, weight = 0)
+        Grid.rowconfigure(right_frame, 3, weight = 0)
