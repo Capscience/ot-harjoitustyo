@@ -13,6 +13,8 @@ class MainView:
         self._frame = None
         self._widgets = []  # storing text widgets for update function
         self._controllers = []
+        self._left_frame = None
+        self._right_frame = None
         self._start()
 
     def pack(self) -> None:
@@ -42,44 +44,60 @@ class MainView:
         Grid.columnconfigure(self._root, 1, weight = 2, minsize = 200)
         Grid.columnconfigure(self._root, 0, weight = 5)
 
-        left_frame = tk.Frame(self._root, bg='white')
-        right_frame = tk.Frame(self._root, bg='white')
-        left_frame.grid(row = 0, column = 0, sticky = 'nsew')
-        right_frame.grid(row = 0, column = 1, sticky = 'nsew')
+        self._left_frame = tk.Frame(self._root, bg='white')
+        self._right_frame = tk.Frame(self._root, bg='white')
+        self._left_frame.grid(row = 0, column = 0, sticky = 'nsew')
+        self._right_frame.grid(row = 0, column = 1, sticky = 'nsew')
 
         # make custom class instead of Treeview
-        self._create_project_controllers()
-
+        self._create_project_controllers(self._left_frame)
+        # self.__dev_create_controllers(left_frame)
         # New project creation area
-        new_project_label = ttk.Label(right_frame, text = 'Luo uusi projekti', font = ('Arial', 18))
+        self._create_new_project_area(self._right_frame)
+
+    def _create_new_project_area(self, root) -> None:
+
+        Grid.columnconfigure(root, 0, weight = 1)
+        new_project_label = ttk.Label(root, text = 'Luo uusi projekti', font = ('Arial', 18))
         new_project_label.grid(row = 0, column = 0, pady = 20, padx = 20, sticky = 'n')
 
-        project_name_label = ttk.Label(right_frame, text = 'Projektin nimi:', font = ('Arial', 12))
-        project_name = ttk.Entry(right_frame)
+        project_name_label = ttk.Label(root, text = 'Projektin nimi:', font = ('Arial', 12))
+        project_name = ttk.Entry(root)
         project_name_label.grid(row = 1, column = 0, pady = 10, padx = 10, sticky = 'nsew')
         project_name.grid(row = 2, column = 0, pady = 10, padx = 10, sticky = 'nsew')
 
         create_project = ttk.Button(
-            right_frame,
+            root,
             command = lambda:[project_service.add_project(project_name.get()),
             project_name.delete(0, 'end'),
-            project_service.print_data()],
+            project_service.print_data(),
+            self._create_project_controllers(self._left_frame)],
             text = 'Lisää projekti'
         )
         create_project.grid(row = 3, column = 0, pady = 10, padx = 10, sticky =' new')
 
-        Grid.columnconfigure(right_frame, 0, weight = 1)
+    def __dev_create_controllers(self, root) -> None:
+        Grid.columnconfigure(root, 0, weight = 1)
+        header = tk.Label(root, text = 'Projektisi tällä hetkellä', font = ('Arial', 18))
+        header.grid(row = 0, column = 0, pady = 20, padx = 20, sticky = 'n')
+        project = Project('Ohte')
+        controller = ProjectController(root, project)
+        controller.grid(1)
 
-    def _create_project_controllers(self) -> None:
+    def _create_project_controllers(self, root) -> None:
         """Get projects from repo and create ProjectControllers for them."""
 
+        Grid.columnconfigure(root, 0, weight = 1)
+        header = tk.Label(root, text = 'Projektisi tällä hetkellä', font = ('Arial', 18))
+        header.grid(row = 0, column = 0, pady = 20, padx = 20, sticky = 'n')
         if len(self._controllers) != 0:
             for controller in self._controllers:
                 controller.destroy()
 
         for i, project in enumerate(project_service.default_repo.get_projects()):
-            controller = ProjectController(self._frame, project)
-            controller.grid(i)
+            print(project)
+            controller = ProjectController(root, project)
+            controller.grid(i+1)
             self._controllers.append(controller)
 
     def destroy(self) -> None:
@@ -98,15 +116,33 @@ class ProjectController:
         )
         self.name = tk.Label(self._frame, text = self._project.name, font = ('Arial', 12))
         self.time = tk.Label(self._frame, text = self._project.timer, font = ('Arial', 12))
-        self.play = tk.Button(self._frame, text = 'Play')
+        self.play = tk.Button(self._frame, text = 'Play', command = self._play())
+        self.pause = tk.Button(self._frame, text = 'Pause', command = self._pause())
+        self.stop = tk.Button(self._frame, text = 'Stop', command = self._stop())
 
     def grid(self, row) -> None:
         """Place ProjectController on screen."""
 
-        self._frame.grid(row = row, pady = 5, padx = 5, sticky = 'new')
         self.name.grid(row = 0, column = 0, padx = 10, pady = 2, sticky = 'w')
         self.time.grid(row = 0, column = 1, padx = 10, pady = 2, sticky = 'e')
-        self.play.grid(row = 0, column = 0, padx = 10, pady = 2, sticky = 'e')
+        self.play.grid(row = 0, column = 2, padx = 10, pady = 2, sticky = 'e')
+        self.pause.grid(row = 0, column = 3, padx = 10, pady = 2, sticky = 'e')
+        self.stop.grid(row = 0, column = 4, padx = 10, pady = 2, sticky = 'e')
+        self._frame.grid(row = row, pady = 5, padx = 5, sticky = 'nsew')
+        Grid.columnconfigure(self._frame, 0, weight = 2)
+        Grid.columnconfigure(self._frame, 1, weight = 1)
+        Grid.columnconfigure(self._frame, 2, weight = 1)
+        Grid.columnconfigure(self._frame, 3, weight = 1)
+        Grid.columnconfigure(self._frame, 4, weight = 1)
+
+    def _play(self) -> None:
+        self._project.timer.start()
+    
+    def _pause(self) -> None:
+        self._project.timer.pause()
+
+    def _stop(self) -> None:
+        self._project.timer.stop()
 
     def destroy(self) -> None:
         self._frame.destroy()

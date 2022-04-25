@@ -55,5 +55,5 @@ class Timer:
         """
 
         worktime = self.pause()
-        self.__times = 0
+        self.__times = []
         return worktime
