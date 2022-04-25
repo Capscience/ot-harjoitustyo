@@ -21,6 +21,11 @@ class ProjectRepository:
                 return True
         return False
 
+    def get_projects(self) -> list:
+        """Method to aquire self._projects from outside the class."""
+
+        return self._projects
+
     def add_project(self, name: str) -> bool:
         """Add new project."""
 

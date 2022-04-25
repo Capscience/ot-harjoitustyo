@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, constants, Grid
 
 from services.project_service import project_service
+from entities.project import Project
 
 
 class MainView:
@@ -47,7 +48,7 @@ class MainView:
         right_frame.grid(row = 0, column = 1, sticky = 'nsew')
 
         # make custom class instead of Treeview
-
+        self._create_project_controllers()
 
         # New project creation area
         new_project_label = ttk.Label(right_frame, text = 'Luo uusi projekti', font = ('Arial', 18))
@@ -76,7 +77,7 @@ class MainView:
             for controller in self._controllers:
                 controller.destroy()
 
-        for i, project in enumerate(project_service.default_repo):
+        for i, project in enumerate(project_service.default_repo.get_projects()):
             controller = ProjectController(self._frame, project)
             controller.grid(i)
             self._controllers.append(controller)
