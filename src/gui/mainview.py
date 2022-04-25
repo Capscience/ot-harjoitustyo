@@ -72,9 +72,14 @@ class MainView:
     def _create_project_controllers(self) -> None:
         """Get projects from repo and create ProjectControllers for them."""
 
+        if len(self._controllers) != 0:
+            for controller in self._controllers:
+                controller.destroy()
+
         for i, project in enumerate(project_service.default_repo):
             controller = ProjectController(self._frame, project)
             controller.grid(i)
+            self._controllers.append(controller)
 
     def destroy(self) -> None:
         self._frame.destroy()
@@ -101,3 +106,6 @@ class ProjectController:
         self.name.grid(row = 0, column = 0, padx = 10, pady = 2, sticky = 'w')
         self.time.grid(row = 0, column = 1, padx = 10, pady = 2, sticky = 'e')
         self.play.grid(row = 0, column = 0, padx = 10, pady = 2, sticky = 'e')
+
+    def destroy(self) -> None:
+        self._frame.destroy()
