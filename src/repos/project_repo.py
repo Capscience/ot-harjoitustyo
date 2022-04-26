@@ -37,9 +37,12 @@ class ProjectRepository:
         name = name.lower()
         if not self.valid_name(name):
             return False
-        self._projects.append(Project(name))
         self._session.add_all([Projects(name = name)])
         self._session.commit()
+        selection = select(Projects).where(Projects.name.in_([name]))
+        for project in self._session.scalars(selection):
+            self._projects.append(Project(project.name, project.id))
+            print(project.name, project.id)
         return True
 
     def print_projects(self) -> None:
@@ -56,9 +59,9 @@ class ProjectRepository:
 
         Base.metadata.create_all(engine)
 
-        selection = select(Projects.name)
-        for name in self._session.scalars(selection):
-            self._projects.append(Project(name))
+        selection = select(Projects)
+        for project in self._session.scalars(selection):
+            self._projects.append(Project(project.name, project.id))
 
 projectrepo = ProjectRepository(Session)
 projectrepo._initialize()
