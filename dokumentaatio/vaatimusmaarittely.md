@@ -10,13 +10,13 @@ Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintoj
 
 ## Perusversion toiminnallisuus
 
-- kurssien lisäys
-- tietojen tallennus sqlite3 tietokantaan
-- kurssiajan tallentaminen ajastimen perusteella
+- (valmis) kurssien lisäys
+- (valmis) tietojen tallennus sqlite3 tietokantaan
+- (valmis) kurssiajan tallentaminen ajastimen perusteella
 
 ## Jatkokehitysideoita
 
 - statistiikat ja kuvaajat eri aiheista
 - selkeä ja siisti käyttöliittymä
-- usea ajastin käytössä samaan aikaan
+- (valmis) usea ajastin käytössä samaan aikaan
 - tietojen exporttaus csv tiedostona
