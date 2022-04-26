@@ -98,12 +98,11 @@ class ProjectController:
     """GUI class to control project timers."""
 
     def __init__(self, root, project) -> None:
-        self._root = root
         self._project = project
         self._text = tk.StringVar()
         self._text.set(str(self._project.timer))
         self._frame = tk.Frame(
-            master = self._root,
+            master = root,
             background = 'grey'
         )
         self.name = tk.Label(self._frame, text = self._project.name, font = ('Arial', 12))
@@ -150,6 +149,6 @@ class ProjectController:
 
     def destroy(self) -> None:
         self._frame.destroy()
-    
+
     def update(self) -> None:
         self._text.set(str(self._project.timer))

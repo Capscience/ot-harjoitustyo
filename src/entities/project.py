@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from database.database import Session, ProjectData
 
 from entities.timer import Timer
