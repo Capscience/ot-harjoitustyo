@@ -1,6 +1,6 @@
 # from database.tables import Projects
 from entities.project import Project
-from database.database import Session, Base, engine
+from database.database import Session, Base, engine, Projects
 
 
 class ProjectRepository:
@@ -10,16 +10,18 @@ class ProjectRepository:
         self._projects = []
         self._session = session
 
-    def check(self, name: str) -> bool:
+    def valid_name(self, name: str) -> bool:
         """Check for project with given name.
 
         Return True if found, else False.
         """
 
+        if name == '':
+            return False
         for project in self._projects:
             if project.name == name:
-                return True
-        return False
+                return False
+        return True
 
     def get_projects(self) -> list:
         """Method to aquire self._projects from outside the class."""
@@ -29,9 +31,12 @@ class ProjectRepository:
     def add_project(self, name: str) -> bool:
         """Add new project."""
 
-        if self.check(name):
+        name = name.lower()
+        if not self.valid_name(name):
             return False
-        self._projects.append(Project(name.lower()))
+        self._projects.append(Project(name))
+        self._session.add_all([Projects(name = name)])
+        self._session.commit()
         return True
 
     def print_projects(self) -> None:
@@ -49,3 +54,4 @@ class ProjectRepository:
         Base.metadata.create_all(engine)
 
 projectrepo = ProjectRepository(Session)
+projectrepo._initialize()
