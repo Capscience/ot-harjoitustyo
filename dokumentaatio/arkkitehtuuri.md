@@ -15,7 +15,7 @@ classDiagram
     GUI <-- MainView
     GUI <-- Statistics
     ProjectController --> MainView
-    MainView <-- ProjectService
+    MainView <-- ProjectRepository
     ProjectRepository <-- Project
     ProjectRepository <-- Projects
     Project <-- ProjectData
