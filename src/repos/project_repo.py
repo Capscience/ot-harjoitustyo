@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from sqlalchemy import select
 
 from entities.project import Project
@@ -12,6 +10,12 @@ class ProjectRepository:
     def __init__(self, session: Session) -> None:
         self._projects = []
         self._session = session
+
+        Base.metadata.create_all(engine)
+
+        selection = select(Projects)
+        for project in self._session.scalars(selection):
+            self._projects.append(Project(project.name, project.id))
 
     def valid_name(self, name: str) -> bool:
         """Check for project with given name.
@@ -54,14 +58,5 @@ class ProjectRepository:
 
         return
 
-    def _initialize(self) -> None:
-        """Initialize database and get data if there is any."""
-
-        Base.metadata.create_all(engine)
-
-        selection = select(Projects)
-        for project in self._session.scalars(selection):
-            self._projects.append(Project(project.name, project.id))
 
 projectrepo = ProjectRepository(Session)
-projectrepo._initialize()
