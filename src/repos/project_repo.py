@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import select
 
 from entities.project import Project
-from database.database import Session, Projects
+from database.database import Session, Base, engine, Projects
 
 
 class ProjectRepository:

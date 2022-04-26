@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import create_engine, Column, String, Integer, DateTime
+from sqlalchemy import create_engine, Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
@@ -20,8 +20,8 @@ class Projects(Base):
     """Database management class for projects."""
 
     __tablename__ = 'projects'
-    id = Column(Integer(), primary_key = True)
-    name = Column(String())
+    id = Column(Integer, primary_key = True)
+    name = Column(String)
 
 
 class ProjectData(Base):
@@ -29,6 +29,6 @@ class ProjectData(Base):
 
     __tablename__ = 'entries'
     id = Column(Integer(), primary_key = True)
-    project_id = Column(Integer())
-    time = Column(Integer())
-    date = Column(DateTime(), default = datetime.now())
+    project_id = Column(Integer)
+    time = Column(Integer)
+    date = Column(DateTime, default = datetime.today().strftime('%Y-%m-%d'))
