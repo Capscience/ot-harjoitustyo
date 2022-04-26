@@ -100,26 +100,28 @@ class ProjectController:
     def __init__(self, root, project) -> None:
         self._root = root
         self._project = project
+        self._text = tk.StringVar()
+        self._text.set(str(self._project.timer))
         self._frame = tk.Frame(
             master = self._root,
             background = 'grey'
         )
         self.name = tk.Label(self._frame, text = self._project.name, font = ('Arial', 12))
-        self.time = tk.Label(self._frame, text = self._project.timer, font = ('Arial', 12))
+        self.time = tk.Label(self._frame, textvariable = self._text, font = ('Arial', 12))
         self.play = tk.Button(
             self._frame,
             text = 'Play',
-            command = lambda:[self._play(), print('play')]
+            command = lambda:[self._play(), print('play'), self.update()]
         )
         self.pause = tk.Button(
             self._frame,
             text = 'Pause',
-            command = lambda:[self._pause(), print('pause')]
+            command = lambda:[self._pause(), print('pause'), self.update()]
         )
         self.stop = tk.Button(
             self._frame,
             text = 'Stop',
-            command = lambda:[self._stop(),print('stop')]
+            command = lambda:[self._stop(),print('stop'), self.update()]
         )
 
     def grid(self, row) -> None:
@@ -148,3 +150,6 @@ class ProjectController:
 
     def destroy(self) -> None:
         self._frame.destroy()
+    
+    def update(self) -> None:
+        self._text.set(str(self._project.timer))

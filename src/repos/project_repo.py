@@ -1,4 +1,7 @@
-# from database.tables import Projects
+from datetime import datetime
+
+from sqlalchemy import select
+
 from entities.project import Project
 from database.database import Session, Base, engine, Projects
 
@@ -52,6 +55,10 @@ class ProjectRepository:
         """Initialize database and get data if there is any."""
 
         Base.metadata.create_all(engine)
+
+        selection = select(Projects.name)
+        for name in self._session.scalars(selection):
+            self._projects.append(Project(name))
 
 projectrepo = ProjectRepository(Session)
 projectrepo._initialize()
