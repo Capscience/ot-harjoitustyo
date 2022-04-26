@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, constants, Grid
 
-from services.project_service import project_service
+from repos.project_repo import projectrepo
 
 
 class MainView:
@@ -67,9 +67,9 @@ class MainView:
 
         create_project = ttk.Button(
             root,
-            command = lambda:[project_service.add_project(project_name.get()),
+            command = lambda:[projectrepo.add_project(project_name.get()),
             project_name.delete(0, 'end'),
-            project_service.print_data(),
+            projectrepo.print_projects(),
             self._create_project_controllers(self._left_frame)],
             text = 'Lisää projekti'
         )
@@ -85,7 +85,7 @@ class MainView:
             for controller in self._controllers:
                 controller.destroy()
 
-        for i, project in enumerate(project_service.default_repo.get_projects()):
+        for i, project in enumerate(projectrepo.get_projects()):
             controller = ProjectController(root, project)
             controller.grid(i+1)
             self._controllers.append(controller)
