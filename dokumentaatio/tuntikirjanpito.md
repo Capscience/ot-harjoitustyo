@@ -9,4 +9,5 @@
 | 11.4.2022 | 6 | Sovelluslogiikan edistäminen, sqlalcemyyn tutustuminen, tietokannan toteutuksen aloitus |
 | 12.4.2022 | 9 | GUI sekä sovelluslogiikan yhdistäminen, sovelluslogiikassa perustoiminnallisuus lähes valmiiksi |
 | 25.4.2022 | 3 | ProjectControllerin tekeminen, guin yhdistäminen eri projektien timereihin |
-| Yhteensä | 28 | |
+| 26.4.2022 | 7 | Sovelluksen saattaminen toimivaan vaiheeseen, tietokantatallennuksen implementointi |
+| Yhteensä | 35 | |
