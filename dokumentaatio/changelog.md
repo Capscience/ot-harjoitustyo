@@ -10,3 +10,8 @@
 - graafinen käyttöliittymä on luotu, oikeaa toiminnallisuutta ei vielä ole
 - sovelluslogiikan ja pysyväistalletuksen runko lähes valmis, ja yhteys käyttöliittymään aloitettu
 
+## Viikko 5
+
+- graafiseen käyttöliittymään lisätty eri kurssien ajastaminen
+- uusien kurssien lisääminen
+- kurssi- sekä aikatiedon tallentaminen tietokantaan
