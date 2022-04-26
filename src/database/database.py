@@ -31,4 +31,4 @@ class ProjectData(Base):
     id = Column(Integer(), primary_key = True)
     project_id = Column(Integer)
     time = Column(Integer)
-    date = Column(DateTime, default = datetime.today().strftime('%Y-%m-%d'))
+    date = Column(DateTime, default = datetime.today())

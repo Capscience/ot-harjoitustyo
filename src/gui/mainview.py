@@ -146,7 +146,7 @@ class ProjectController:
         self._project.timer.pause()
 
     def _stop(self) -> None:
-        self._project.timer.stop()
+        self._project.save()
 
     def destroy(self) -> None:
         self._frame.destroy()

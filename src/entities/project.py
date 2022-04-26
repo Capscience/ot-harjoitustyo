@@ -21,3 +21,4 @@ class Project:
 
         time = self.timer.stop()
         Session.add_all([ProjectData(project_id = self.id_, time = time)])
+        Session.commit()
