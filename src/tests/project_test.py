@@ -6,8 +6,8 @@ class TestProject(unittest.TestCase):
     """Test class Project."""
 
     def setUp(self):
-        self.p1 = Project('one')
-        self.p2 = Project('two')
+        self.p1 = Project('one', 1)
+        self.p2 = Project('two', 2)
     
     def test_repr(self):
         out = str(self.p1)

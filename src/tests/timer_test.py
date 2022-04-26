@@ -18,7 +18,7 @@ class TestTimer(unittest.TestCase):
         self.assertEqual(ret, '00:00:02')
         sleep(2)
         ret = self.timer.stop()
-        self.assertEqual(ret, '00:00:04')
+        self.assertEqual(ret, 4)
     
     def test_pause(self):
         self.timer.start()
@@ -28,7 +28,7 @@ class TestTimer(unittest.TestCase):
         self.timer.start()
         sleep(1)
         ret = self.timer.stop()
-        self.assertEqual(ret, '00:00:02')
+        self.assertEqual(ret, 2)
     
     def test_halfrounding(self):
         self.timer.start()
@@ -40,18 +40,18 @@ class TestTimer(unittest.TestCase):
         self.assertEqual(ret, '00:00:00')
         sleep(1)
         ret = self.timer.stop()
-        self.assertEqual(ret, '00:00:01')
+        self.assertEqual(ret, 1)
     
     def test_pause_while_paused(self):
         self.timer.pause()
         self.timer.start()
         sleep(0.5)
         ret = self.timer.stop()
-        self.assertEqual(ret, '00:00:00')
+        self.assertEqual(ret, 0)
     
     def test_start_while_running(self):
         self.timer.start()
         self.timer.start()
         sleep(0.5)
         ret = self.timer.stop()
-        self.assertEqual(ret, '00:00:00')
+        self.assertEqual(ret, 0)

@@ -1,3 +1,7 @@
+from datetime import datetime
+
+from database.database import Session, ProjectData
+
 from entities.timer import Timer
 
 
@@ -12,3 +16,8 @@ class Project:
     def __repr__(self) -> str:
         return f'<Project name: {self.name}, timer: {self.timer}>'
 
+    def save(self) -> None:
+        """Save projects timer to database."""
+
+        time = self.timer.stop()
+        Session.add_all([ProjectData(project_id = self.id_, time = time)])

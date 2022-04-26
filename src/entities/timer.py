@@ -55,6 +55,12 @@ class Timer:
         Worktime is rounded to the nearest half or whole second.
         """
 
-        worktime = self.pause()
+        if self.__running:
+            total = int(sum(self.__times) + time.time() - self.__start)
+        else:
+            total = int(sum(self.__times))
+        self.__running = False
         self.__times = []
-        return worktime
+        self.__start = 0
+        self.__stop = 0
+        return total
