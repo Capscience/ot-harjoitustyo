@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk, constants, Grid
 
 from services.project_service import project_service
-from entities.project import Project
 
 
 class MainView:
@@ -76,14 +75,6 @@ class MainView:
         )
         create_project.grid(row = 3, column = 0, pady = 10, padx = 10, sticky =' new')
 
-    def __dev_create_controllers(self, root) -> None:
-        Grid.columnconfigure(root, 0, weight = 1)
-        header = tk.Label(root, text = 'Projektisi tällä hetkellä', font = ('Arial', 18))
-        header.grid(row = 0, column = 0, pady = 20, padx = 20, sticky = 'n')
-        project = Project('Ohte')
-        controller = ProjectController(root, project)
-        controller.grid(1)
-
     def _create_project_controllers(self, root) -> None:
         """Get projects from repo and create ProjectControllers for them."""
 
@@ -95,7 +86,6 @@ class MainView:
                 controller.destroy()
 
         for i, project in enumerate(project_service.default_repo.get_projects()):
-            print(project)
             controller = ProjectController(root, project)
             controller.grid(i+1)
             self._controllers.append(controller)
@@ -116,9 +106,21 @@ class ProjectController:
         )
         self.name = tk.Label(self._frame, text = self._project.name, font = ('Arial', 12))
         self.time = tk.Label(self._frame, text = self._project.timer, font = ('Arial', 12))
-        self.play = tk.Button(self._frame, text = 'Play', command = self._play())
-        self.pause = tk.Button(self._frame, text = 'Pause', command = self._pause())
-        self.stop = tk.Button(self._frame, text = 'Stop', command = self._stop())
+        self.play = tk.Button(
+            self._frame,
+            text = 'Play',
+            command = lambda:[self._play(), print('play')]
+        )
+        self.pause = tk.Button(
+            self._frame,
+            text = 'Pause',
+            command = lambda:[self._pause(), print('pause')]
+        )
+        self.stop = tk.Button(
+            self._frame,
+            text = 'Stop',
+            command = lambda:[self._stop(),print('stop')]
+        )
 
     def grid(self, row) -> None:
         """Place ProjectController on screen."""
@@ -137,7 +139,7 @@ class ProjectController:
 
     def _play(self) -> None:
         self._project.timer.start()
-    
+
     def _pause(self) -> None:
         self._project.timer.pause()
 

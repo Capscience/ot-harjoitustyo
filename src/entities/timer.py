@@ -9,9 +9,9 @@ class Timer:
 
         Create Timer object, starts at 0.
         """
-
         self.__times = []
         self.__start = 0
+        self.__stop = 0
         self.__running = False
 
     def __repr__(self) -> str:
@@ -19,7 +19,10 @@ class Timer:
 
         if self.__start == 0:
             return '00:00:00'
-        total = int(sum(self.__times) + time.time() - self.__start)
+        if self.__running:
+            total = int(sum(self.__times) + time.time() - self.__start)
+        else:
+            total = int(sum(self.__times))
         hours = total // 3600
         minutes = total%3600 // 60
         seconds = total%60
@@ -27,7 +30,6 @@ class Timer:
 
     def start(self) -> None:
         """Start new or paused timer."""
-
         if self.__running:
             return
         self.__start = time.time()
@@ -41,12 +43,11 @@ class Timer:
 
         if not self.__running:
             return None
-        stop = time.time()
-        self.__times.append(stop - self.__start)
+        self.__stop = time.time()
+        self.__times.append(self.__stop - self.__start)
         self.__running = False
 
-        total = sum(self.__times)
-        return round(total * 2) / 2 # total/3600 later to get hours
+        return self.__repr__()
 
     def stop(self) -> float:
         """Stop timer and return worktime.
