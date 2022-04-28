@@ -1,5 +1,6 @@
-from database.database import Session, ProjectData
+from sqlalchemy.orm import Session
 
+from database.database import ProjectData, ENGINE
 from entities.timer import Timer
 
 
@@ -18,5 +19,6 @@ class Project:
         """Save projects timer to database."""
 
         time = self.timer.stop()
-        Session.add_all([ProjectData(project_id = self.id_, time = time)])
-        Session.commit()
+        with Session(ENGINE) as session:
+            session.add_all([ProjectData(project_id = self.id_, time = time)])
+            session.commit()

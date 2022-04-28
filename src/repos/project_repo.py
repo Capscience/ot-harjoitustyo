@@ -1,7 +1,8 @@
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from entities.project import Project
-from database.database import Session, Base, engine, Projects
+from database.database import Base, ENGINE, Projects
 
 
 class ProjectRepository:
@@ -9,13 +10,14 @@ class ProjectRepository:
 
     def __init__(self, session: Session) -> None:
         self._projects = []
-        self._session = session
 
-        Base.metadata.create_all(engine)
+        Base.metadata.create_all(ENGINE)
 
-        selection = select(Projects)
-        for project in self._session.scalars(selection):
-            self._projects.append(Project(project.name, project.id))
+        with Session(ENGINE) as session:
+            selection = select(Projects)
+            for project in session.scalars(selection):
+                self._projects.append(Project(project.name, project.id))
+            session.commit()
 
     def valid_name(self, name: str) -> bool:
         """Check for project with given name.
@@ -41,12 +43,14 @@ class ProjectRepository:
         name = name.lower()
         if not self.valid_name(name):
             return False
-        self._session.add_all([Projects(name = name)])
-        self._session.commit()
-        selection = select(Projects).where(Projects.name.in_([name]))
-        for project in self._session.scalars(selection):
-            self._projects.append(Project(project.name, project.id))
-            print(project.name, project.id)
+        with Session(ENGINE) as session:
+            session.add_all([Projects(name = name)])
+            session.commit()
+            selection = select(Projects).where(Projects.name.in_([name]))
+            for project in session.scalars(selection):
+                self._projects.append(Project(project.name, project.id))
+                print(project.name, project.id)
+            session.commit()
         return True
 
     def print_projects(self) -> None:
