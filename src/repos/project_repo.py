@@ -8,7 +8,7 @@ from database.database import Base, ENGINE, Projects
 class ProjectRepository:
     """Class that handles creating and saving new projects."""
 
-    def __init__(self, session: Session) -> None:
+    def __init__(self) -> None:
         self._projects = []
 
         Base.metadata.create_all(ENGINE)
@@ -63,4 +63,4 @@ class ProjectRepository:
         return
 
 
-projectrepo = ProjectRepository(Session)
+projectrepo = ProjectRepository()
