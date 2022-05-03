@@ -152,3 +152,4 @@ class ProjectController:
 
     def update(self) -> None:
         self._text.set(str(self._project.timer))
+        self.time.after(1000, self.update)
