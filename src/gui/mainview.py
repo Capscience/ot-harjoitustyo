@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, constants, Grid
+from datetime import datetime
 
 from repos.project_repo import projectrepo
 
@@ -39,7 +40,8 @@ class MainView:
             master = self._root,
             background = 'black'
         )
-        Grid.rowconfigure(self._root, 0, weight = 1)
+        Grid.rowconfigure(self._root, 0, weight = 1)    # Fills root height
+        # Divide window to 2 frames in 5:2 width ratio
         Grid.columnconfigure(self._root, 1, weight = 2, minsize = 200)
         Grid.columnconfigure(self._root, 0, weight = 5)
 
@@ -54,26 +56,35 @@ class MainView:
         self._create_new_project_area(self._right_frame)
         # Project deletion area
         self._create_delete_project_area(self._right_frame)
+        # Statistics area
+        self._create_statistics_area(self._right_frame)
 
     def _create_project_controllers(self, root) -> None:
         """Get projects from repo and create ProjectControllers for them."""
 
-        Grid.columnconfigure(root, 0, weight = 1)
+        Grid.columnconfigure(root, 0, weight = 1)   # Fills root width
         header = tk.Label(root, text = 'Projektisi tällä hetkellä', font = ('Arial', 18))
         header.grid(row = 0, column = 0, pady = 20, padx = 20, sticky = 'n')
+
+        # Destroy existing controllers so no duplicates are created
         if len(self._controllers) != 0:
             for controller in self._controllers:
                 controller.destroy()
 
+        # Create new controllers
         for i, project in enumerate(projectrepo.get_projects()):
             controller = ProjectController(root, project)
-            controller.grid(i+1)
-            controller.update()
+            controller.grid(i+1)    # Stack controllers on top of each other
+            controller.update()     # Restart GUI timer update cycle for runnig timers
             self._controllers.append(controller)
 
     def _create_new_project_area(self, root) -> None:
+        """Create section where new projects can be added.
 
-        Grid.columnconfigure(root, 0, weight = 1)
+        Section is placed in first 4 rows of given root.
+        """
+
+        Grid.columnconfigure(root, 0, weight = 1)   # Column 0 fills width of root
         new_project_label = ttk.Label(root, text = 'Luo uusi projekti', font = ('Arial', 18))
         new_project_label.grid(row = 0, column = 0, pady = 20, padx = 20, sticky = 'n')
 
@@ -95,6 +106,7 @@ class MainView:
     def _create_project(self, name) -> None:
         """Create project function for button."""
 
+        # Try adding and print message accordingly
         if projectrepo.add_project(name):
             message = 'Lisäys onnistui!'
         else:
@@ -105,7 +117,7 @@ class MainView:
             font = ('Arial', 12)
         )
         display_message.grid(row = 4, column = 0, pady = 10, padx = 10, sticky = 'nsew')
-        display_message.after(5000, display_message.destroy)
+        display_message.after(5000, display_message.destroy)    # Displays message for 5s
 
     def _create_delete_project_area(self, root) -> None:
         """Create area where projects can be deleted."""
@@ -127,9 +139,7 @@ class MainView:
         delete_project = ttk.Button(
             root,
             command = lambda:[self._delete_project(project_name.get()),
-            project_name.delete(0, 'end'),
-            projectrepo.print_projects(),
-            self._create_project_controllers(self._left_frame)],
+            project_name.delete(0, 'end')],
             text = 'Poista projekti'
         )
         delete_project.grid(row = 8, column = 0, pady = 10, padx = 10, sticky =' new')
@@ -146,8 +156,41 @@ class MainView:
             text = message,
             font = ('Arial', 12)
         )
-        display_message.grid(row = 10, column = 0, pady = 10, padx = 10, sticky = 'nsew')
+        display_message.grid(row = 9, column = 0, pady = 10, padx = 10, sticky = 'nsew')
         display_message.after(5000, display_message.destroy)
+
+    def _create_statistics_area(self, root) -> None:
+        """Create area where statistics are shown."""
+
+        Grid.columnconfigure(root, 0, weight = 1)
+        statistics_label = ttk.Label(root, text = 'Statistiikat', font = ('Arial', 18))
+        # Leave one empty row for error messages, so row numbering starts from 10
+        statistics_label.grid(row = 10, column = 0, pady = 20, padx = 20, sticky = 'n')
+
+        project_name_label = ttk.Label(
+            root,
+            text = 'Anna aikamääre (yyyy-mm tai yyyy-mm-dd, tyhjä antaa koko historian.)',
+            font = ('Arial', 12)
+        )
+        timeframe = ttk.Entry(root)
+        project_name_label.grid(row = 11, column = 0, pady = 10, padx = 10, sticky = 'nsew')
+        timeframe.grid(row = 12, column = 0, pady = 10, padx = 10, sticky = 'nsew')
+
+        search_stats = ttk.Button(
+            root,
+            command = lambda:[self._get_statistics(root, timeframe.get()),
+            timeframe.delete(0, 'end')],
+            text = 'Hae tiedot'
+        )
+        search_stats.grid(row = 13, column = 0, pady = 10, padx = 10, sticky =' new')
+        self._get_statistics(root, datetime.today().strftime('%Y-%m'))  # Get default stats
+    
+    def _get_statistics(self, root, timestr: str) -> None:
+        """Creates and gets the statistics of given timeframe."""
+
+        text = projectrepo.get_stats(timestr)
+        stats_label = ttk.Label(root, text = text, font = ('Courier', 14))
+        stats_label.grid(row = 14, column = 0, pady = 10, padx = 10, sticky =' new')
 
     def destroy(self) -> None:
         self._frame.destroy()
@@ -164,8 +207,8 @@ class ProjectController:
             master = root,
             background = 'grey'
         )
-        self.name = tk.Label(self._frame, text = self._project.name, font = ('Arial', 12))
-        self.time = tk.Label(self._frame, textvariable = self._text, font = ('Arial', 12))
+        self.name = tk.Label(self._frame, text = f' {self._project.name:<12}', font = ('Courier', 14))
+        self.time = tk.Label(self._frame, textvariable = self._text, font = ('Courier', 14))
         self.play = tk.Button(
             self._frame,
             text = 'Play',
@@ -191,8 +234,8 @@ class ProjectController:
         self.pause.grid(row = 0, column = 3, padx = 10, pady = 2, sticky = 'e')
         self.stop.grid(row = 0, column = 4, padx = 10, pady = 2, sticky = 'e')
         self._frame.grid(row = row, pady = 5, padx = 5, sticky = 'nsew')
-        Grid.columnconfigure(self._frame, 0, weight = 2)
-        Grid.columnconfigure(self._frame, 1, weight = 1)
+        Grid.columnconfigure(self._frame, 0, weight = 3)
+        Grid.columnconfigure(self._frame, 1, weight = 3)
         Grid.columnconfigure(self._frame, 2, weight = 1)
         Grid.columnconfigure(self._frame, 3, weight = 1)
         Grid.columnconfigure(self._frame, 4, weight = 1)

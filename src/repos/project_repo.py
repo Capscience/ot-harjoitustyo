@@ -1,5 +1,8 @@
+from datetime import datetime, timedelta
+
 from sqlalchemy import select, delete
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import func
 
 from entities.project import Project, ProjectData
 from database.database import Base, ENGINE, Projects
@@ -72,6 +75,31 @@ class ProjectRepository:
                     session.commit()
                 return True
         return False
+    
+    def get_stats(self, timestr: str) -> str:
+        """Return stats for given timestr as a string."""
+
+        projects_with_times = {}
+        with Session(ENGINE) as session:
+            for project in self._projects:
+                selection = select(func.sum(ProjectData.time), ProjectData.date).where(
+                    ProjectData.project_id == project.id_,
+                    ProjectData.date.startswith(timestr))
+                # Must iterate to get data as an integer
+                for data in session.scalars(selection):
+                    if data is None:
+                        data = 0
+                    projects_with_times[project.name] = str(timedelta(seconds = data))
+            session.commit()
+        if timestr == '':
+            text = f' Projektien kokonaisajat kaikista\n tallennetuista ajoista:\n\n'
+        else:
+            text = f' Projektien kokonaisajat ajanjaksolta {timestr}:\n\n'
+
+        for key, value in projects_with_times.items():
+            key = key + ':'
+            text += f' {key:<18}{value}\n'
+        return text
 
     def print_projects(self) -> None:
         for project in self._projects:
