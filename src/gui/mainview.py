@@ -6,9 +6,18 @@ from repos.project_repo import projectrepo
 
 
 class MainView:
-    """Class for main window."""
+    """Class for main window.
+
+    Args:
+        root: Root window where view is placed.
+    """
 
     def __init__(self, root) -> None:
+        """Class constructor.
+
+        Saves root window, and frames that divide the view to sections.
+        ProjectControllers are saved to a list for easy handling.
+        """
         self._root = root
         self._frame = None
         self._controllers = []
@@ -19,6 +28,7 @@ class MainView:
     def _start(self) -> None:
         """Initialize view layout."""
 
+        # Create main frame
         self._frame = tk.Frame(
             master = self._root,
             background = 'black'
@@ -28,6 +38,7 @@ class MainView:
         Grid.columnconfigure(self._root, 1, weight = 2, minsize = 200)
         Grid.columnconfigure(self._root, 0, weight = 5)
 
+        # Create and grid dividing frames
         self._left_frame = tk.Frame(self._root, bg='white')
         self._right_frame = tk.Frame(self._root, bg='white')
         self._left_frame.grid(row = 0, column = 0, sticky = 'nsew')
@@ -43,7 +54,10 @@ class MainView:
         self._create_statistics_area(self._right_frame)
 
     def _create_project_controllers(self, root) -> None:
-        """Get projects from repo and create ProjectControllers for them."""
+        """Get projects from repo and create ProjectControllers for them.
+
+        Args:
+            root: Root frame where controllers are placed."""
 
         Grid.columnconfigure(root, 0, weight = 1)   # Fills root width
         header = tk.Label(root, text = 'Projektisi tällä hetkellä', font = ('Arial', 18))
@@ -65,6 +79,9 @@ class MainView:
         """Create section where new projects can be added.
 
         Section is placed in first 4 rows of given root.
+
+        Args:
+            root: Root frame where area is placed.
         """
 
         Grid.columnconfigure(root, 0, weight = 1)   # Column 0 fills width of root
@@ -86,9 +103,13 @@ class MainView:
         create_project.grid(row = 3, column = 0, pady = 10, padx = 10, sticky =' new')
 
     def _create_project(self, name) -> None:
-        """Create project function for button."""
+        """Create project function for button.
 
-        # Try adding and print message accordingly
+        Args:
+            name: Name of the project that is going to be saved and displayed.
+        """
+
+        # Try adding the project and print message accordingly
         if projectrepo.add_project(name):
             message = 'Lisäys onnistui!'
         else:
@@ -102,7 +123,11 @@ class MainView:
         display_message.after(5000, display_message.destroy)    # Displays message for 5s
 
     def _create_delete_project_area(self, root) -> None:
-        """Create area where projects can be deleted."""
+        """Create area where projects can be deleted.
+
+        Args:
+            root: Root frame where area is placed.
+        """
 
         Grid.columnconfigure(root, 0, weight = 1)
         delete_label = ttk.Label(root, text = 'Poista projekti', font = ('Arial', 18))
@@ -128,7 +153,11 @@ class MainView:
         delete_project.grid(row = 8, column = 0, pady = 10, padx = 10, sticky =' new')
 
     def _delete_project(self, name: str) -> None:
-        """Delete project function for button."""
+        """Delete project with given name and all data connected to it.
+
+        Args:
+            name: Name of the project that will be deleted.
+        """
 
         if projectrepo.delete_project(name):
             message = 'Projekti poistettu.'
@@ -143,7 +172,11 @@ class MainView:
         display_message.after(5000, display_message.destroy)
 
     def _create_statistics_area(self, root) -> None:
-        """Create area where statistics are shown."""
+        """Create area where statistics are shown.
+
+        Args:
+            root: Root frame where the area is placed.
+        """
 
         Grid.columnconfigure(root, 0, weight = 1)
         statistics_label = ttk.Label(root, text = 'Statistiikat', font = ('Arial', 18))
@@ -169,20 +202,37 @@ class MainView:
         self._get_statistics(root, datetime.today().strftime('%Y-%m'))  # Get default stats
 
     def _get_statistics(self, root, timestr: str) -> None:
-        """Creates and gets the statistics of given timeframe."""
+        """Creates and gets the statistics of given timeframe.
+
+        Args:
+            root: Root frame where stats will be displayed.
+            timestr: Datetime-like string. Used to get stats for certain month or day.
+                Use empty string to get all data.
+        """
 
         text = projectrepo.get_stats(timestr)
         stats_label = ttk.Label(root, text = text, font = ('Courier', 14))
         stats_label.grid(row = 14, column = 0, pady = 10, padx = 10, sticky =' new')
 
     def destroy(self) -> None:
+        """Destroy the main frame."""
+
         self._frame.destroy()
 
 
 class ProjectController:
-    """GUI class to control project timers."""
+    """GUI class to control project timers.
+
+    Args:
+        root: Root frame where controllers are placed.
+        project: Project object for the controller to control.
+    """
 
     def __init__(self, root, project) -> None:
+        """Class constructor.
+
+        self._text is needed to update time easily while timer is running.
+        """
         self._project = project
         self._text = tk.StringVar()
         self._text.set(str(self._project.timer))
@@ -216,8 +266,11 @@ class ProjectController:
             command = lambda:[self._stop(), self.update()]
         )
 
-    def grid(self, row) -> None:
-        """Place ProjectController on screen."""
+    def grid(self, row: int) -> None:
+        """Place ProjectController on screen.
+
+        Args:
+            row: Tells which row controller is placed on. """
 
         self.name.grid(row = 0, column = 0, padx = 10, pady = 2, sticky = 'w')
         self.time.grid(row = 0, column = 1, padx = 10, pady = 2, sticky = 'e')
@@ -232,17 +285,27 @@ class ProjectController:
         Grid.columnconfigure(self._frame, 4, weight = 1)
 
     def _play(self) -> None:
+        """Start or restart project's timer."""
+
         self._project.timer.start()
 
     def _pause(self) -> None:
+        """Pause project's timer."""
+
         self._project.timer.pause()
 
     def _stop(self) -> None:
+        """Stop project's timer."""
+
         self._project.save()
 
     def destroy(self) -> None:
+        """Destroy main frame of controller."""
+
         self._frame.destroy()
 
     def update(self) -> None:
+        """Update timer of self._project every 1000 ms."""
+
         self._text.set(str(self._project.timer))
         self.time.after(1000, self.update)

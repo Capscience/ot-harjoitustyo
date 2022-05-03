@@ -12,10 +12,14 @@ class ProjectRepository:
     """Class that handles creating and saving new projects."""
 
     def __init__(self) -> None:
+        """Class constructor."""
+
         self._projects = []
 
+        # Create database if it doesn't exist
         Base.metadata.create_all(ENGINE)
 
+        # Get projects from database
         with Session(ENGINE) as session:
             selection = select(Projects)
             for project in session.scalars(selection):
@@ -25,7 +29,11 @@ class ProjectRepository:
     def valid_name(self, name: str) -> bool:
         """Check for project with given name.
 
-        Return True if found, else False.
+        Args:
+            name: Name to validate.
+
+        Returns:
+            True if name is valid, else False.
         """
 
         if name == '':
@@ -41,7 +49,14 @@ class ProjectRepository:
         return self._projects
 
     def add_project(self, name: str) -> bool:
-        """Add new project."""
+        """Add new project.
+
+        Args:
+            name: Name of the project to be added.
+
+        Returns:
+            True if adding successful, else False.
+        """
 
         name = name.lower()
         if not self.valid_name(name):
@@ -59,7 +74,11 @@ class ProjectRepository:
     def delete_project(self, name: str) -> bool:
         """Delete project with name from repo and database.
 
-        Return True if project is successfully deleted, else False.
+        Args:
+            name: name of the project to be deleted.
+
+        Returns:
+            True if project is successfully deleted, else False.
         """
 
         for project in self._projects:
@@ -77,7 +96,14 @@ class ProjectRepository:
         return False
 
     def get_stats(self, timestr: str) -> str:
-        """Return stats for given timestr as a string."""
+        """Return stats for given timestr as a string.
+
+        Args:
+            timestr: time string to filter query results.
+
+        Returns:
+            text: string to be displayed in GUI.
+        """
 
         projects_with_times = {}
         with Session(ENGINE) as session:

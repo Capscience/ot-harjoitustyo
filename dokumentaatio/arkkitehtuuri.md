@@ -13,20 +13,18 @@ Sovelluksessa on toistaiseksi vain yksi näkymä. Vasemmalla puolella ovat pää
 ```mermaid
 classDiagram
     GUI <-- MainView
-    GUI <-- Statistics
     ProjectController --> MainView
     MainView <-- ProjectRepository
     ProjectRepository <-- Project
     ProjectRepository <-- Projects
     Project <-- ProjectData
+    ProjectRepository <-- ProjectData
     Project <-- Timer
     class GUI{
     }
     class MainView{
     }
     class ProjectController{
-    }
-    class Statistics{
     }
     class ProjectRepository{
     }

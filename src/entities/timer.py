@@ -5,17 +5,22 @@ class Timer:
     """Timer class for workhour counter."""
 
     def __init__(self) -> None:
-        """Class init method.
+        """Class constructor.
 
         Create Timer object, starts at 0.
         """
-        self.__times = []
-        self.__start = 0
-        self.__stop = 0
-        self.__running = False
+
+        self.__times = []   # Save times when paused
+        self.__start = 0    # Start time for calculating time difference
+        self.__stop = 0     # Stop time
+        self.__running = False  # Tells methods if timer is running
 
     def __repr__(self) -> str:
-        """String form of timer."""
+        """String form of timer.
+
+        Returns:
+            str: Time in hh:mm:ss format.
+        """
 
         if self.__start == 0:
             return '00:00:00'
@@ -30,15 +35,17 @@ class Timer:
 
     def start(self) -> None:
         """Start new or paused timer."""
+
         if self.__running:
             return
         self.__start = time.time()
         self.__running = True
 
-    def pause(self) -> float:
-        """Pause timer, use start() to continue.
+    def pause(self) -> str:
+        """Pause timer, can be restarted.
 
-        Return worktime so far.
+        Returns:
+            self.__repr__(): String representation of the class.
         """
 
         if not self.__running:
@@ -49,10 +56,11 @@ class Timer:
 
         return self.__repr__()
 
-    def stop(self) -> float:
+    def stop(self) -> int:
         """Stop timer and return worktime.
 
-        Worktime is rounded to the nearest half or whole second.
+        Returns:
+            total: Total worktime in seconds.
         """
 
         if self.__running:

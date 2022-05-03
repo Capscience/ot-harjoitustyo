@@ -2,7 +2,11 @@ from gui.mainview import MainView
 
 
 class GUI:
-    """Class that handles all GUI interactions."""
+    """Class that handles all GUI interactions.
+
+    Args:
+        root: Root window where GUI will be placed.
+    """
 
     def __init__(self, root) -> None:
         self._root = root
