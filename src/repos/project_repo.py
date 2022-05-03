@@ -1,7 +1,7 @@
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from sqlalchemy.orm import Session
 
-from entities.project import Project
+from entities.project import Project, ProjectData
 from database.database import Base, ENGINE, Projects
 
 
@@ -52,6 +52,26 @@ class ProjectRepository:
                 print(project.name, project.id)
             session.commit()
         return True
+    
+    def delete_project(self, name: str) -> bool:
+        """Delete project with name from repo and database.
+        
+        Return True if project is successfully deleted, else False.
+        """
+
+        for project in self._projects:
+            if project.name == name:
+                self._projects.remove(project)
+                with Session(ENGINE) as session:
+                    delete_project = delete(Projects).where(Projects.name == name)
+                    session.execute(delete_project)
+                    delete_entries = delete(ProjectData).where(
+                        ProjectData.project_id == project.id_
+                    )
+                    session.execute(delete_entries)
+                    session.commit()
+                return True
+        return False
 
     def print_projects(self) -> None:
         for project in self._projects:

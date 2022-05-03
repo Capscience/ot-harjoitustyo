@@ -106,13 +106,28 @@ class MainView:
 
         delete_project = ttk.Button(
             root,
-            command = lambda:[projectrepo.add_project(project_name.get()),
+            command = lambda:[self._delete_project(project_name.get()),
             project_name.delete(0, 'end'),
             projectrepo.print_projects(),
             self._create_project_controllers(self._left_frame)],
             text = 'Poista projekti'
         )
         delete_project.grid(row = 8, column = 0, pady = 10, padx = 10, sticky =' new')
+    
+    def _delete_project(self, name: str) -> None:
+        """Delete project function for button."""
+
+        if projectrepo.delete_project(name):
+            message = 'Projekti poistettu.'
+        else:
+            message = 'Projektia ei löytynyt.'
+        display_message = ttk.Label(
+            self._right_frame,
+            text = message,
+            font = ('Arial', 12)
+        )
+        display_message.grid(row = 10, column = 0, pady = 10, padx = 10, sticky = 'nsew')
+        display_message.after(5000, display_message.destroy)
 
     def destroy(self) -> None:
         self._frame.destroy()
