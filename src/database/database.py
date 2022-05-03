@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 
 # Create SqlAlchemy connection to database projecttimer.db
-ENGINE = create_engine('sqlite:///projecttimer.db', echo=True)
+ENGINE = create_engine('sqlite:///projecttimer.db', echo = False)
 
 # Init Base class for tables to use
 Base = declarative_base()

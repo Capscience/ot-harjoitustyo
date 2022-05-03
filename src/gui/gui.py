@@ -28,12 +28,3 @@ class GUI:
         self._open = MainView(
             self._root
         )
-
-        #self._open.pack()
-
-    def resize(self, event) -> None:
-        """Resize all text in GUI."""
-
-        width = event.width
-
-        self._open.update(width)

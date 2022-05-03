@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, constants, Grid
+from tkinter import ttk, Grid
 from datetime import datetime
 
 from repos.project_repo import projectrepo
@@ -11,27 +11,10 @@ class MainView:
     def __init__(self, root) -> None:
         self._root = root
         self._frame = None
-        self._widgets = []  # storing text widgets for update function
         self._controllers = []
         self._left_frame = None
         self._right_frame = None
         self._start()
-
-    def pack(self) -> None:
-        """Pack self._frame."""
-
-        self._frame.pack(fill = constants.BOTH)
-
-    def update(self, width) -> None:
-
-        size = int(width*0.01)
-        # style = ttk.Style()
-        # style.theme_use('default')
-        # style.map('TreeView')
-        # style.configure('Treeview.Heading', font = ('Arial', size))
-        # style.configure('Label', font = ('Arial', size))
-        for widget in self._widgets:
-            widget.config(font = ('Arial', size))
 
     def _start(self) -> None:
         """Initialize view layout."""
@@ -97,7 +80,6 @@ class MainView:
             root,
             command = lambda:[self._create_project(project_name.get()),
             project_name.delete(0, 'end'),
-            projectrepo.print_projects(),
             self._create_project_controllers(self._left_frame)],
             text = 'Lisää projekti'
         )
@@ -139,7 +121,8 @@ class MainView:
         delete_project = ttk.Button(
             root,
             command = lambda:[self._delete_project(project_name.get()),
-            project_name.delete(0, 'end')],
+            project_name.delete(0, 'end'),
+            self._create_project_controllers(self._left_frame)],
             text = 'Poista projekti'
         )
         delete_project.grid(row = 8, column = 0, pady = 10, padx = 10, sticky =' new')
@@ -184,7 +167,7 @@ class MainView:
         )
         search_stats.grid(row = 13, column = 0, pady = 10, padx = 10, sticky =' new')
         self._get_statistics(root, datetime.today().strftime('%Y-%m'))  # Get default stats
-    
+
     def _get_statistics(self, root, timestr: str) -> None:
         """Creates and gets the statistics of given timeframe."""
 
@@ -207,22 +190,30 @@ class ProjectController:
             master = root,
             background = 'grey'
         )
-        self.name = tk.Label(self._frame, text = f' {self._project.name:<12}', font = ('Courier', 14))
-        self.time = tk.Label(self._frame, textvariable = self._text, font = ('Courier', 14))
+        self.name = tk.Label(
+            self._frame,
+            text = f' {self._project.name:<12}',
+            font = ('Courier', 14)
+        )
+        self.time = tk.Label(
+            self._frame,
+            textvariable = self._text,
+            font = ('Courier', 14)
+        )
         self.play = tk.Button(
             self._frame,
             text = 'Play',
-            command = lambda:[self._play(), print('play'), self.update()]
+            command = lambda:[self._play(), self.update()]
         )
         self.pause = tk.Button(
             self._frame,
             text = 'Pause',
-            command = lambda:[self._pause(), print('pause'), self.update()]
+            command = lambda:[self._pause(), self.update()]
         )
         self.stop = tk.Button(
             self._frame,
             text = 'Stop',
-            command = lambda:[self._stop(),print('stop'), self.update()]
+            command = lambda:[self._stop(), self.update()]
         )
 
     def grid(self, row) -> None:

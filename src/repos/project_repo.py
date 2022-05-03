@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from sqlalchemy import select, delete
 from sqlalchemy.orm import Session
@@ -75,7 +75,7 @@ class ProjectRepository:
                     session.commit()
                 return True
         return False
-    
+
     def get_stats(self, timestr: str) -> str:
         """Return stats for given timestr as a string."""
 
@@ -92,7 +92,7 @@ class ProjectRepository:
                     projects_with_times[project.name] = str(timedelta(seconds = data))
             session.commit()
         if timestr == '':
-            text = f' Projektien kokonaisajat kaikista\n tallennetuista ajoista:\n\n'
+            text = ' Projektien kokonaisajat kaikista\n tallennetuista ajoista:\n\n'
         else:
             text = f' Projektien kokonaisajat ajanjaksolta {timestr}:\n\n'
 
@@ -104,11 +104,6 @@ class ProjectRepository:
     def print_projects(self) -> None:
         for project in self._projects:
             print(project.name, project.timer)
-
-    def _update(self) -> None:
-        """Read projects from ProjectData."""
-
-        return
 
 
 projectrepo = ProjectRepository()

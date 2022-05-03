@@ -12,8 +12,6 @@ def main() -> None:
     window = GUI(root)
     window.start()
 
-    root.bind('<Configure>', window.resize)
-
     root.mainloop()
 
 
