@@ -4,8 +4,8 @@ from sqlalchemy import select, delete
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
 
-from entities.project import Project, ProjectData
-from database.database import Base, ENGINE, Projects
+from entities.project import Project
+from database.database import Base, ENGINE, Projects, ProjectData
 
 
 class ProjectRepository:
@@ -67,7 +67,6 @@ class ProjectRepository:
             selection = select(Projects).where(Projects.name.in_([name]))
             for project in session.scalars(selection):
                 self._projects.append(Project(project.name, project.id))
-                print(project.name, project.id)
             session.commit()
         return True
 
