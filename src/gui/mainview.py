@@ -48,11 +48,27 @@ class MainView:
         self._left_frame.grid(row = 0, column = 0, sticky = 'nsew')
         self._right_frame.grid(row = 0, column = 1, sticky = 'nsew')
 
-        # make custom class instead of Treeview
+        # Create ProjectControllers for each project
         self._create_project_controllers(self._left_frame)
-        # self.__dev_create_controllers(left_frame)
         # New project creation area
         self._create_new_project_area(self._right_frame)
+        # Project deletion area
+        self._create_delete_project_area(self._right_frame)
+
+    def _create_project_controllers(self, root) -> None:
+        """Get projects from repo and create ProjectControllers for them."""
+
+        Grid.columnconfigure(root, 0, weight = 1)
+        header = tk.Label(root, text = 'Projektisi tällä hetkellä', font = ('Arial', 18))
+        header.grid(row = 0, column = 0, pady = 20, padx = 20, sticky = 'n')
+        if len(self._controllers) != 0:
+            for controller in self._controllers:
+                controller.destroy()
+
+        for i, project in enumerate(projectrepo.get_projects()):
+            controller = ProjectController(root, project)
+            controller.grid(i+1)
+            self._controllers.append(controller)
 
     def _create_new_project_area(self, root) -> None:
 
@@ -75,20 +91,28 @@ class MainView:
         )
         create_project.grid(row = 3, column = 0, pady = 10, padx = 10, sticky =' new')
 
-    def _create_project_controllers(self, root) -> None:
-        """Get projects from repo and create ProjectControllers for them."""
+    def _create_delete_project_area(self, root) -> None:
+        """Create area where projects can be deleted."""
 
         Grid.columnconfigure(root, 0, weight = 1)
-        header = tk.Label(root, text = 'Projektisi tällä hetkellä', font = ('Arial', 18))
-        header.grid(row = 0, column = 0, pady = 20, padx = 20, sticky = 'n')
-        if len(self._controllers) != 0:
-            for controller in self._controllers:
-                controller.destroy()
+        delete_label = ttk.Label(root, text = 'Poista projekti', font = ('Arial', 18))
+        # Leave one empty row for error messages, so row numbering starts from 5
+        delete_label.grid(row = 5, column = 0, pady = 20, padx = 20, sticky = 'n')
 
-        for i, project in enumerate(projectrepo.get_projects()):
-            controller = ProjectController(root, project)
-            controller.grid(i+1)
-            self._controllers.append(controller)
+        project_name_label = ttk.Label(root, text = 'Poistettavan projektin nimi:', font = ('Arial', 12))
+        project_name = ttk.Entry(root)
+        project_name_label.grid(row = 6, column = 0, pady = 10, padx = 10, sticky = 'nsew')
+        project_name.grid(row = 7, column = 0, pady = 10, padx = 10, sticky = 'nsew')
+
+        delete_project = ttk.Button(
+            root,
+            command = lambda:[projectrepo.add_project(project_name.get()),
+            project_name.delete(0, 'end'),
+            projectrepo.print_projects(),
+            self._create_project_controllers(self._left_frame)],
+            text = 'Poista projekti'
+        )
+        delete_project.grid(row = 8, column = 0, pady = 10, padx = 10, sticky =' new')
 
     def destroy(self) -> None:
         self._frame.destroy()
