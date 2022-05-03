@@ -10,4 +10,5 @@
 | 12.4.2022 | 9 | GUI sekä sovelluslogiikan yhdistäminen, sovelluslogiikassa perustoiminnallisuus lähes valmiiksi |
 | 25.4.2022 | 3 | ProjectControllerin tekeminen, guin yhdistäminen eri projektien timereihin |
 | 26.4.2022 | 7 | Sovelluksen saattaminen toimivaan vaiheeseen, tietokantatallennuksen implementointi |
-| Yhteensä | 35 | |
+| 3.5.2022 | 10 | Sovelluksen jokaisen perusominaisuuden viimeisteleminen. |
+| Yhteensä | 45 | |
