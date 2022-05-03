@@ -68,6 +68,7 @@ class MainView:
         for i, project in enumerate(projectrepo.get_projects()):
             controller = ProjectController(root, project)
             controller.grid(i+1)
+            controller.update()
             self._controllers.append(controller)
 
     def _create_new_project_area(self, root) -> None:
@@ -83,13 +84,28 @@ class MainView:
 
         create_project = ttk.Button(
             root,
-            command = lambda:[projectrepo.add_project(project_name.get()),
+            command = lambda:[self._create_project(project_name.get()),
             project_name.delete(0, 'end'),
             projectrepo.print_projects(),
             self._create_project_controllers(self._left_frame)],
             text = 'Lisää projekti'
         )
         create_project.grid(row = 3, column = 0, pady = 10, padx = 10, sticky =' new')
+    
+    def _create_project(self, name) -> None:
+        """Create project function for button."""
+
+        if projectrepo.add_project(name):
+            message = 'Lisäys onnistui!'
+        else:
+            message = 'Virheellinen syöte.\n Käytä nimessä vain kirjaimia ja yhtä sanaa.'
+        display_message = ttk.Label(
+            self._right_frame,
+            text = message,
+            font = ('Arial', 12)
+        )
+        display_message.grid(row = 4, column = 0, pady = 10, padx = 10, sticky = 'nsew')
+        display_message.after(5000, display_message.destroy)
 
     def _create_delete_project_area(self, root) -> None:
         """Create area where projects can be deleted."""
