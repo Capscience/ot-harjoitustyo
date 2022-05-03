@@ -52,10 +52,10 @@ class ProjectRepository:
                 print(project.name, project.id)
             session.commit()
         return True
-    
+
     def delete_project(self, name: str) -> bool:
         """Delete project with name from repo and database.
-        
+
         Return True if project is successfully deleted, else False.
         """
 

@@ -91,7 +91,7 @@ class MainView:
             text = 'Lisää projekti'
         )
         create_project.grid(row = 3, column = 0, pady = 10, padx = 10, sticky =' new')
-    
+
     def _create_project(self, name) -> None:
         """Create project function for button."""
 
@@ -115,7 +115,11 @@ class MainView:
         # Leave one empty row for error messages, so row numbering starts from 5
         delete_label.grid(row = 5, column = 0, pady = 20, padx = 20, sticky = 'n')
 
-        project_name_label = ttk.Label(root, text = 'Poistettavan projektin nimi:', font = ('Arial', 12))
+        project_name_label = ttk.Label(
+            root,
+            text = 'Poistettavan projektin nimi:',
+            font = ('Arial', 12)
+        )
         project_name = ttk.Entry(root)
         project_name_label.grid(row = 6, column = 0, pady = 10, padx = 10, sticky = 'nsew')
         project_name.grid(row = 7, column = 0, pady = 10, padx = 10, sticky = 'nsew')
@@ -129,7 +133,7 @@ class MainView:
             text = 'Poista projekti'
         )
         delete_project.grid(row = 8, column = 0, pady = 10, padx = 10, sticky =' new')
-    
+
     def _delete_project(self, name: str) -> None:
         """Delete project function for button."""
 

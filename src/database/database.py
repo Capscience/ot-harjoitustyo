@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from sqlalchemy import create_engine, Column, String, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -26,4 +24,4 @@ class ProjectData(Base):
     id = Column(Integer(), primary_key = True)
     project_id = Column(Integer)
     time = Column(Integer)
-    date = Column(DateTime, default = datetime.today())
+    date = Column(DateTime)

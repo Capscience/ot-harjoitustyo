@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy.orm import Session
 
 from database.database import ProjectData, ENGINE
@@ -20,5 +22,7 @@ class Project:
 
         time = self.timer.stop()
         with Session(ENGINE) as session:
-            session.add_all([ProjectData(project_id = self.id_, time = time)])
+            session.add_all(
+                [ProjectData(project_id = self.id_, time = time, date = datetime.today())]
+            )
             session.commit()
