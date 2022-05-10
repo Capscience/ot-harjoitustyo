@@ -20,9 +20,11 @@ class ProjectRepository:
         # Create database if it doesn't exist
         Base.metadata.create_all(ENGINE)
 
-        # Get projects from database
+        # Get active projects from database
         with Session(ENGINE) as session:
-            selection = select(Projects).where(Projects.active == True)
+            selection = select(Projects).\
+                where(Projects.active is True)
+
             for project in session.scalars(selection):
                 self._projects.append(Project(project.name, project.id))
             session.commit()
@@ -46,12 +48,20 @@ class ProjectRepository:
         return True
 
     def get_projects(self) -> list:
-        """Method to aquire self._projects from outside the class."""
+        """Method to aquire self._projects from outside the class.
+
+        Returns:
+            self._projects: List of all active projects
+        """
 
         return self._projects
-    
+
     def _query_all_projects(self) -> list:
-        """Query all active and not active projects from database."""
+        """Query all active and not active projects from database.
+
+        Returns:
+            all_projects: All projects in database
+        """
 
         all_projects = []
         with Session(ENGINE) as session:
@@ -73,20 +83,29 @@ class ProjectRepository:
 
         if not self.valid_name(name):
             return False
-        
+
         all_projects = self._query_all_projects()
+
         for project in all_projects:
+            # Check for deactivated (deleted) projects to reactivate
             if project.name.lower() == name.lower():
+                # Set active column to True
                 with Session(ENGINE) as session:
-                    re_activate = update(Projects).where(Projects.name == project.name).\
-                        values(active = True).execution_options(synchronize_session = 'fetch')
+                    re_activate = update(Projects).\
+                        where(Projects.name == project.name).\
+                        values(active = True).\
+                        execution_options(synchronize_session = 'fetch')
                     session.execute(re_activate)
-                    selection = select(Projects).where(Projects.name.in_([name]))
-                    for project in session.scalars(selection):
-                        self._projects.append(Project(project.name, project.id))
+
+                    # Get reactivated project to projectrepo
+                    selection = select(Projects).\
+                        where(Projects.name.in_([name]))
+                    for result in session.scalars(selection):
+                        self._projects.append(Project(result.name, result.id))
                     session.commit()
                 return True
 
+        # Create new project
         with Session(ENGINE) as session:
             session.add_all([Projects(name = name, active = True)])
             session.commit()
@@ -99,7 +118,7 @@ class ProjectRepository:
     def delete_project(self, name: str) -> bool:
         """Delete project with given name from repo.
 
-        Does not delete from database, sets the project not active.
+        Does not delete from database, sets the project inactive.
 
         Args:
             name: name of the project to be deleted.
@@ -112,8 +131,10 @@ class ProjectRepository:
             if project.name == name:
                 self._projects.remove(project)
                 with Session(ENGINE) as session:
-                    deactivate = update(Projects).where(Projects.name == name).\
-                        values(active = False).execution_options(synchronize_session = 'fetch')
+                    deactivate = update(Projects).\
+                        where(Projects.name == name).\
+                        values(active = False).\
+                        execution_options(synchronize_session = 'fetch')
                     session.execute(deactivate)
                     session.commit()
                 return True

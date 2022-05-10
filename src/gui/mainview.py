@@ -113,7 +113,8 @@ class MainView:
         if projectrepo.add_project(name):
             message = 'Lisäys onnistui!'
         else:
-            message = 'Virheellinen syöte.\n Anna nimeksi yksi sana, joka voi sisältää isoja ja pieniä kirjaimia sekä numeroita'
+            message = 'Virheellinen syöte.\n Anna projektin nimeksi yksi sana, joka\n' + \
+            ' voi sisältää isoja ja pieniä kirjaimia sekä numeroita'
         display_message = ttk.Label(
             self._right_frame,
             text = message,
