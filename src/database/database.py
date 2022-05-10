@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 
 # Create SqlAlchemy connection to database projecttimer.db
-ENGINE = create_engine('sqlite:///projecttimer.db', echo = False)
+ENGINE = create_engine('sqlite:///projecttimer.db', echo = True)
 
 # Initialize Base class for ORM (Object Relational Mapper) tables to use
 Base = declarative_base()
@@ -20,7 +20,7 @@ class Projects(Base):
     __tablename__ = 'projects'
     id = Column(Integer, primary_key = True)
     name = Column(String)
-#    active = Column(Boolean)
+    active = Column(Boolean)
 
 
 class ProjectData(Base):

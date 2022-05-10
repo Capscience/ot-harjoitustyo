@@ -1,7 +1,7 @@
 from datetime import timedelta
 import re
 
-from sqlalchemy import select, delete
+from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
 
@@ -22,7 +22,7 @@ class ProjectRepository:
 
         # Get projects from database
         with Session(ENGINE) as session:
-            selection = select(Projects)
+            selection = select(Projects).where(Projects.active == True)
             for project in session.scalars(selection):
                 self._projects.append(Project(project.name, project.id))
             session.commit()
@@ -49,6 +49,17 @@ class ProjectRepository:
         """Method to aquire self._projects from outside the class."""
 
         return self._projects
+    
+    def _query_all_projects(self) -> list:
+        """Query all active and not active projects from database."""
+
+        all_projects = []
+        with Session(ENGINE) as session:
+            selection = select(Projects)
+            for project in session.scalars(selection):
+                all_projects.append(Project(project.name, project.id))
+            session.commit()
+        return all_projects
 
     def add_project(self, name: str) -> bool:
         """Add new project.
@@ -62,9 +73,22 @@ class ProjectRepository:
 
         if not self.valid_name(name):
             return False
+        
+        all_projects = self._query_all_projects()
+        for project in all_projects:
+            if project.name.lower() == name.lower():
+                with Session(ENGINE) as session:
+                    re_activate = update(Projects).where(Projects.name == project.name).\
+                        values(active = True).execution_options(synchronize_session = 'fetch')
+                    session.execute(re_activate)
+                    selection = select(Projects).where(Projects.name.in_([name]))
+                    for project in session.scalars(selection):
+                        self._projects.append(Project(project.name, project.id))
+                    session.commit()
+                return True
 
         with Session(ENGINE) as session:
-            session.add_all([Projects(name = name)])
+            session.add_all([Projects(name = name, active = True)])
             session.commit()
             selection = select(Projects).where(Projects.name.in_([name]))
             for project in session.scalars(selection):
@@ -73,7 +97,9 @@ class ProjectRepository:
         return True
 
     def delete_project(self, name: str) -> bool:
-        """Delete project with name from repo and database.
+        """Delete project with given name from repo.
+
+        Does not delete from database, sets the project not active.
 
         Args:
             name: name of the project to be deleted.
@@ -86,12 +112,9 @@ class ProjectRepository:
             if project.name == name:
                 self._projects.remove(project)
                 with Session(ENGINE) as session:
-                    delete_project = delete(Projects).where(Projects.name == name)
-                    session.execute(delete_project)
-                    delete_entries = delete(ProjectData).where(
-                        ProjectData.project_id == project.id_
-                    )
-                    session.execute(delete_entries)
+                    deactivate = update(Projects).where(Projects.name == name).\
+                        values(active = False).execution_options(synchronize_session = 'fetch')
+                    session.execute(deactivate)
                     session.commit()
                 return True
         return False
@@ -106,17 +129,20 @@ class ProjectRepository:
             text: string to be displayed in GUI.
         """
 
-        projects_with_times = {}
+        projects_with_times = {}    # Save name and total time here
+        all_projects = self._query_all_projects()
+
         with Session(ENGINE) as session:
-            for project in self._projects:
-                selection = select(func.sum(ProjectData.time), ProjectData.date).where(
-                    ProjectData.project_id == project.id_,
+            for project in all_projects:
+                selection = select(func.sum(ProjectData.time)).where(
+                    ProjectData.project_id == project.id_).where(
                     ProjectData.date.startswith(timestr))
                 # Must iterate to get data as an integer
                 for data in session.scalars(selection):
                     if data is None:
                         data = 0
-                    projects_with_times[project.name] = str(timedelta(seconds = data))
+                    if data > 0:
+                        projects_with_times[project.name] = str(timedelta(seconds = data))
             session.commit()
         if timestr == '':
             text = ' Projektien kokonaisajat kaikista\n tallennetuista ajoista:\n\n'
