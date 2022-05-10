@@ -15,3 +15,8 @@
 - graafiseen käyttöliittymään lisätty eri kurssien ajastaminen
 - uusien kurssien lisääminen
 - kurssi- sekä aikatiedon tallentaminen tietokantaan
+
+## Viikko 6
+
+- lisättiin mahdollisuus poistaa projekteja
+- lisättiin statistiikkojen hakeminen ja esittäminen

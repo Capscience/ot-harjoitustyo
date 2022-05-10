@@ -20,3 +20,8 @@ def coverage_report(ctx):
 @task
 def lint(ctx):
     ctx.run('pylint src', pty = True)
+
+
+@task
+def reset(ctx):
+    ctx.run('rm projecttimer.db', pty = True)
