@@ -1,4 +1,5 @@
 from datetime import timedelta
+import re
 
 from sqlalchemy import select, delete
 from sqlalchemy.orm import Session
@@ -36,10 +37,11 @@ class ProjectRepository:
             True if name is valid, else False.
         """
 
-        if name == '':
+        sieve = re.compile('^[a-öA-Ö0-9]+$') # Match any single word
+        if sieve.match(name) is None:
             return False
         for project in self._projects:
-            if project.name == name:
+            if project.name.lower() == name.lower():
                 return False
         return True
 
@@ -58,9 +60,9 @@ class ProjectRepository:
             True if adding successful, else False.
         """
 
-        name = name.lower()
         if not self.valid_name(name):
             return False
+
         with Session(ENGINE) as session:
             session.add_all([Projects(name = name)])
             session.commit()

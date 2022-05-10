@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, String, Integer, DateTime
+from sqlalchemy import create_engine, Column, String, Integer, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
 
@@ -20,6 +20,7 @@ class Projects(Base):
     __tablename__ = 'projects'
     id = Column(Integer, primary_key = True)
     name = Column(String)
+#    active = Column(Boolean)
 
 
 class ProjectData(Base):
