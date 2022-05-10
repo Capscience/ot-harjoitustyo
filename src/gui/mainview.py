@@ -23,6 +23,7 @@ class MainView:
         self._controllers = []
         self._left_frame = None
         self._right_frame = None
+        self._stats_label = None
         self._start()
 
     def _start(self) -> None:
@@ -211,9 +212,11 @@ class MainView:
                 Use empty string to get all data.
         """
 
+        if self._stats_label is not None:
+            self._stats_label.destroy()
         text = projectrepo.get_stats(timestr)
-        stats_label = ttk.Label(root, text = text, font = ('Courier', 14))
-        stats_label.grid(row = 14, column = 0, pady = 10, padx = 10, sticky =' new')
+        self._stats_label = ttk.Label(root, text = text, font = ('Courier', 14))
+        self._stats_label.grid(row = 14, column = 0, pady = 10, padx = 10, sticky =' new')
 
     def destroy(self) -> None:
         """Destroy the main frame."""

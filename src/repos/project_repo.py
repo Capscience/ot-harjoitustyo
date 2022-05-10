@@ -23,7 +23,7 @@ class ProjectRepository:
         # Get active projects from database
         with Session(ENGINE) as session:
             selection = select(Projects).\
-                where(Projects.active is True)
+                where(bool(Projects.active))
 
             for project in session.scalars(selection):
                 self._projects.append(Project(project.name, project.id))
@@ -84,8 +84,13 @@ class ProjectRepository:
         if not self.valid_name(name):
             return False
 
-        all_projects = self._query_all_projects()
+        # Check if same name project is in active projects
+        for project in self.get_projects():
+            if name.lower() == project.name.lower():
+                return False
 
+        # Check if same name project is deactivated
+        all_projects = self._query_all_projects()
         for project in all_projects:
             # Check for deactivated (deleted) projects to reactivate
             if project.name.lower() == name.lower():
@@ -155,9 +160,9 @@ class ProjectRepository:
 
         with Session(ENGINE) as session:
             for project in all_projects:
-                selection = select(func.sum(ProjectData.time)).where(
-                    ProjectData.project_id == project.id_).where(
-                    ProjectData.date.startswith(timestr))
+                selection = select(func.sum(ProjectData.time)).\
+                    where(ProjectData.project_id == project.id_).\
+                    where(ProjectData.date.startswith(timestr))
                 # Must iterate to get data as an integer
                 for data in session.scalars(selection):
                     if data is None:
