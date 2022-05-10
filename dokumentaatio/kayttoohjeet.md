@@ -37,5 +37,7 @@ Ikkunan oikeassa reunassa on kohta "Statistiikat". Sovellus hakee käynnistyess�
 ### Projektin poistaminen
 ___
 
-### HUOM! Projektin poistaminen poistaa myös kyseisen projektin tallennetut datat!
-Projektin poistaminen tapahtuu oikean reunan kohdasta "Poista projekti". Projektin nimi kirjoitetaan tekstikenttään, ja painetaan "Poista projekti". Projektin hallintapalkki katoaa, ja tiedot poistetaan tietokannasta.
+Projektin poistaminen tapahtuu oikean reunan kohdasta "Poista projekti". Projektin nimi kirjoitetaan tekstikenttään, ja painetaan "Poista projekti". Projektin hallintapalkki katoaa, mutta kurssi jää edelleen tietokantaan deaktiivisena. Nyt projektille ei tule hallintapalkkia, mutta sen datat näkyy edelleen statistiikoissa. Projektin uudelleenaktivointi tapahtuu luomalla uusi saman niminen projekti. Mikäli haluat nollata koko tietokannan, voit käyttää komentoa:
+```
+poetry run invoke reset
+```

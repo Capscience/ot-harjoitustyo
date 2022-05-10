@@ -20,3 +20,7 @@
 
 - lisättiin mahdollisuus poistaa projekteja
 - lisättiin statistiikkojen hakeminen ja esittäminen
+
+## Viikko 7
+
+- projektien poistaminen muutettiin deaktivoinniksi, näin datat pysyvät tallessa

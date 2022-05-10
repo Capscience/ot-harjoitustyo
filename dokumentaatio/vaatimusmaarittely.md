@@ -16,7 +16,7 @@ Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintoj
 
 ## Jatkokehitysideoita
 
-- statistiikat ja kuvaajat eri aiheista
-- selkeä ja siisti käyttöliittymä
+- (osittain valmis) statistiikat ja kuvaajat eri aiheista
+- (osittain valmis) selkeä ja siisti käyttöliittymä
 - (valmis) usea ajastin käytössä samaan aikaan
 - tietojen exporttaus csv tiedostona

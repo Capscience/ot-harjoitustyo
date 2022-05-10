@@ -11,4 +11,5 @@
 | 25.4.2022 | 3 | ProjectControllerin tekeminen, guin yhdistäminen eri projektien timereihin |
 | 26.4.2022 | 7 | Sovelluksen saattaminen toimivaan vaiheeseen, tietokantatallennuksen implementointi |
 | 3.5.2022 | 10 | Sovelluksen jokaisen perusominaisuuden viimeisteleminen. |
-| Yhteensä | 45 | |
+| 10.5.2022 | 4 | Projektien poistamisen muokkaaminen siten, että datat säilyy. Lisäksi testikattavuuden lisääminen. |
+| Yhteensä | 49 | |
