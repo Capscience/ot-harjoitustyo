@@ -55,3 +55,8 @@ Pylint-testin voi ajaa komennolla:
 ```
 poetry run invoke lint
 ```
+
+Tietokannan voi nollata (poistaa) komennolla:
+```
+poetry run invoke reset
+```
