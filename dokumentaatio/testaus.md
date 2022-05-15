@@ -30,4 +30,4 @@ Sovellus on asennettu Linux-ympäristöön kahdella eri koneella ja eri Linux-di
 
 # Sovellukseen jääneet laatuongelmat
 
-- Sovellus ei ilmaise täysin selvästi, jos uutta projektia luodessa projekti on olemassa inaktiivisessa tilassa, jolloin sovellus ei luo uutta projektia, vaan aktivoi inaktiivisen projektin.
+- Pienellä ikkunakoolla osa projektien statistiikoista voivat jäädä ikkunan ulkopuolelle
