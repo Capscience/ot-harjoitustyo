@@ -111,8 +111,11 @@ class MainView:
         """
 
         # Try adding the project and print message accordingly
-        if projectrepo.add_project(name):
-            message = 'Lisäys onnistui!'
+        status = projectrepo.add_project(name)
+        if status == 1:
+            message = f'{name} oli epäaktiivisessa tilassa, ja on nyt uudelleenaktivoitu!'
+        elif status == 2:
+            message = f'Luotiin uusi projekti nimellä "{name}"!'
         else:
             message = 'Virheellinen syöte.\n Anna projektin nimeksi yksi sana, joka\n' + \
             ' voi sisältää isoja ja pieniä kirjaimia sekä numeroita'
@@ -162,7 +165,8 @@ class MainView:
         """
 
         if projectrepo.delete_project(name):
-            message = 'Projekti poistettu.'
+            message = 'Projekti poistettu aktiivisista projekteista.\n'\
+                + 'Luo projekti samalla nimellä aktivoidaksesi uudelleen.'
         else:
             message = 'Projektia ei löytynyt.'
         display_message = ttk.Label(

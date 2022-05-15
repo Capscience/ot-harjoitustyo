@@ -23,8 +23,7 @@ class ProjectRepository:
         # Get active projects from database
         with Session(ENGINE) as session:
             selection = select(Projects).\
-                where(bool(Projects.active))
-
+                where(Projects.active == 1)
             for project in session.scalars(selection):
                 self._projects.append(Project(project.name, project.id))
             session.commit()
@@ -82,12 +81,12 @@ class ProjectRepository:
         """
 
         if not self.valid_name(name):
-            return False
+            return 0
 
         # Check if same name project is in active projects
         for project in self.get_projects():
             if name.lower() == project.name.lower():
-                return False
+                return 0
 
         # Check if same name project is deactivated
         all_projects = self._query_all_projects()
@@ -108,7 +107,7 @@ class ProjectRepository:
                     for result in session.scalars(selection):
                         self._projects.append(Project(result.name, result.id))
                     session.commit()
-                return True
+                return 1
 
         # Create new project
         with Session(ENGINE) as session:
@@ -118,7 +117,7 @@ class ProjectRepository:
             for project in session.scalars(selection):
                 self._projects.append(Project(project.name, project.id))
             session.commit()
-        return True
+        return 2
 
     def delete_project(self, name: str) -> bool:
         """Delete project with given name from repo.
