@@ -15,14 +15,14 @@ class TestRepo(unittest.TestCase):
 
     def test_add_project(self):
         add_empty = self.repo.add_project('')
-        self.assertEqual(add_empty, False)
+        self.assertEqual(add_empty, 0)
         add_testi = self.repo.add_project('testi')
-        self.assertEqual(add_testi, True)
+        self.assertEqual(add_testi, 2)
         self.assertEqual(len(self.repo.get_projects()), self.length + 1)
 
     def test_add_same_name(self):
         add_same = self.repo.add_project('testi')
-        self.assertEqual(add_same, False)
+        self.assertEqual(add_same, 0)
 
     def test_delete_project(self):
         delete_fail = self.repo.delete_project('testi1')
