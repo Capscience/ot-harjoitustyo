@@ -30,6 +30,8 @@ Testit suoritettu python-versiolla `3.8.3`. Varsinkin vanhempien python-versioid
 
 [arkkitehtuuri.md](/dokumentaatio/arkkitehtuuri.md)
 
+[testaus.md](/dokumentaatio/testaus.md)
+
 ## Asennus
 
 1. Asenna vaadittavat moduulit:
