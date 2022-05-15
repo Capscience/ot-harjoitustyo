@@ -2,13 +2,15 @@
 
 ## Asennus
 
+
+
 Varmista ensin, että koneelta löytyy poetry komennolla
 ```
 poetry --version
 ```
 Mikäli poetryä ei löydy, voit asentaa sen [täältä](https://python-poetry.org/docs/#installation).
 
-Kun poetry on asennettuna, aja sovelluksen hakemistossa komento
+Lataa viimeisin release [GitHubista](https://github.com/Capslock01/ot-harjoitustyo/releases). Unzippaa ohjelma haluamaasi tiedostoon, ja aja siellä komento
 ```
 poetry install
 ```
