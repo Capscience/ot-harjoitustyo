@@ -18,15 +18,15 @@ Testit suoritettu python-versiolla `3.8.3`. Varsinkin vanhempien python-versioid
 
 ## Dokumentaatio
 
-[kayttoohjeet.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohjeet.md)
+[kayttoohjeet.md](/dokumentaatio/kayttoohjeet.md)
 
-[tuntikirjanpito.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+[tuntikirjanpito.md](/dokumentaatio/tuntikirjanpito.md)
 
-[vaativuusmaarittely.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[vaativuusmaarittely.md](/dokumentaatio/vaatimusmaarittely.md)
 
-[changelog.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
+[changelog.md](/dokumentaatio/changelog.md)
 
-[arkkitehtuuri.md](https://github.com/Capslock01/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+[arkkitehtuuri.md](/dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
 
