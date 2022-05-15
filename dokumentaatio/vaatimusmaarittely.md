@@ -2,9 +2,9 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintojen tai töiden parissa. Sovelluksesta pystyy seuraamaan eri aikajaksojen statistiikkoja ja kuvaajia käytetystä ajasta eri kohteisiin.
+Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintojen tai töiden parissa. Sovelluksesta pystyy seuraamaan eri aikajaksojen statistiikkoja.
 
-## Käyttöliittymä
+## Käyttöliittymäluonnos
 
 ![](./kayttoliittyma.png)
 
@@ -16,7 +16,7 @@ Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintoj
 
 ## Jatkokehitysideoita
 
-- (osittain valmis) statistiikat ja kuvaajat eri aiheista
-- (osittain valmis) selkeä ja siisti käyttöliittymä
-- (valmis) usea ajastin käytössä samaan aikaan
+- statistiikat (valmis) ja kuvaajat (ei valmis) tallennetuista ajoista
+- (valmis) selkeä ja siisti käyttöliittymä
+- (hylätty, parempi että muut menevät pauselle kun toisen käynnistää) usea ajastin käytössä samaan aikaan
 - tietojen exporttaus csv tiedostona
