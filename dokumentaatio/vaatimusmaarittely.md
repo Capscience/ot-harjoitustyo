@@ -1,5 +1,7 @@
 # Vaatimusmäärittely
 
+Toteutetut ominaisuudet merkitty valmiiksi 15.5.2022
+
 ## Sovelluksen tarkoitus
 
 Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintojen tai töiden parissa. Sovelluksesta pystyy seuraamaan eri aikajaksojen statistiikkoja.
