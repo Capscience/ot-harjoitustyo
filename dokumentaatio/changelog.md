@@ -24,3 +24,4 @@
 ## Viikko 7
 
 - projektien poistaminen muutettiin deaktivoinniksi, näin datat pysyvät tallessa
+- ohjelman sekä dokumentaation viimeisteleminen
