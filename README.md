@@ -5,6 +5,7 @@ Sovelluksen avulla voit helposti pitää kirjaa eri projekteihin tai kursseihin 
 ## Release
 
 Viimeisin:
+
 [versio 1.1](https://github.com/Capslock01/ot-harjoitustyo/releases/tag/viikko6)
 
 Aiemmat versiot:
