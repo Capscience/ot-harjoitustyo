@@ -18,5 +18,5 @@ Sovelluksen avulla käyttäjä pystyy kirjaamaan ja seuraamaan työaikaa opintoj
 
 - statistiikat (valmis) ja kuvaajat (ei valmis) tallennetuista ajoista
 - (valmis) selkeä ja siisti käyttöliittymä
-- (hylätty, parempi että muut menevät pauselle kun toisen käynnistää) usea ajastin käytössä samaan aikaan
+- (valmis) usea ajastin käytössä samaan aikaan
 - tietojen exporttaus csv tiedostona

@@ -12,4 +12,5 @@
 | 26.4.2022 | 7 | Sovelluksen saattaminen toimivaan vaiheeseen, tietokantatallennuksen implementointi |
 | 3.5.2022 | 10 | Sovelluksen jokaisen perusominaisuuden viimeisteleminen. |
 | 10.5.2022 | 4 | Projektien poistamisen muokkaaminen siten, että datat säilyy. Lisäksi testikattavuuden lisääminen. |
-| Yhteensä | 49 | |
+| 15.5.2022 | 3 | Projektin käynnistäminen laittaa muut projektit pauselle. Työn viimeisteleminen palautusta varten |
+| Yhteensä | 52 | |
