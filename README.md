@@ -3,13 +3,17 @@
 Sovelluksen avulla voit helposti pitää kirjaa eri projekteihin tai kursseihin käyttämääsi aikaa. Kirjattuja työaikoja pystyy tarkastelemaan statistiikkojen sekä kuvaajien muodossa.
 
 ## Release
+
+Viimeisin:
 [versio 1.1](https://github.com/Capslock01/ot-harjoitustyo/releases/tag/viikko6)
+
+Aiemmat versiot:
 
 [versio 1.0](https://github.com/Capslock01/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Python-versiosta
 
-Testit suoritettu python-versioilla `3.8.3` sekä `3.10.4`. Varsinkin vanhempien python-versioiden kanssa sovellus voi toimia virheellisesti, tai olla toimimatta lainkaan.
+Testit suoritettu python-versiolla `3.8.3`. Varsinkin vanhempien python-versioiden kanssa sovellus voi toimia virheellisesti, tai olla toimimatta lainkaan.
 
 ## Dokumentaatio
 
