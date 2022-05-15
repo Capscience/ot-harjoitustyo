@@ -37,6 +37,9 @@ classDiagram
     class ProjectData{
     }
 ```
+Käyttöliittymästä vastaa GUI luokka. Tämä käyttää päänäkymän luovaa MainView-luokkaa. Rakenne mahdollistaa useamman näkymän tekemisen, mutta vain yksi on käytössä. Projektien hallintapalkit ovat oma luokkansa, jota vain MainView käyttää.
+ProjectRepository on luokka, joka hoitaa tietokantatallennuksen hallitsemisesta, ja hoitaa tiedon säilytyksen ajon aikana. Ohjelman ajon aikana projektit tallennetaan Project-olioina, joille jokaiselle on luotu oma Timer-olio.
+Tietokannan käyttöön ProjectRepository käyttää kahta taulua, jotka on tehty SQLalchemya käyttäen Projects- ja ProjectData luokkina. Projects-tauluun tallennetaan vain projektit. ProjectData-tauluun tallennetaan mitatut ajat, joissa viitataan Projects-taulun id-avaimeen.
 
 ## Sekvenssikaavio
 
@@ -75,4 +78,7 @@ sequenceDiagram
     ProjectRepository ->> ProjectData: select(func.sum(ProjectData.time)).where()ProjectData.project_id == project.id_, ProjectData.date.startswith(timestr))
     ProjectData -->> ProjectRepository: 20
     ProjectRepository -->> MainView: '' Projektien kokonaisajat kaikista\n tallennetuista ajoista:\n\n ohte '00:00:20'
-    
+```
+index.py tiedoston ajaminen käynnistää sovelluksen. Index käynnistää GUI:n, joka käynnistää päänäkymän. Päänäkymä pyytää ProjectReposta tallennetut projektit. ProjectRepo hakee kaikki tietokannassa olevat projektit, ja tallentaa niistä Project-oliot listaan.
+Kun käyttäjä luo uuden projektin, ProjectRepo tarkastaa, onko projektin nimi validi, ja luo uuden projektin. MainView luo uudelle projektille ProjectController-olion projektin hallintaan käyttöliittymällä. Kun ProjectControllerista painaa play-nappia, käynnistetään kyseisen projektin Timer.
+Stop-nappi ajaa Timerin stop-metodin. ProjectRepo tallentaa mitatun ajan tietokantaan. Nyt projektidatan hakeminen tyhjällä haulla hakee koko historian tallennetuista ajoista. Statistiikoissa näytetään jokaisen ikinä luodun projektin kokonaisajan.
